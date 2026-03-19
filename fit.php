@@ -15,19 +15,24 @@
 // ─── Load credentials ────────────────────────────────────
 require_once __DIR__ . '/db.php';   // defines ANTHROPIC_API_KEY
 
-// ─── CORS — same-origin only ─────────────────────────────
-// On Namecheap shared hosting, resume.tobyziegler.com is the only
-// origin that should be calling this endpoint.
-$allowed_origin = 'https://resume.tobyziegler.com';
+// ─── CORS — allow same-site and the resume subdomain ─────
+// Browsers omit the Origin header for same-origin requests.
+// Only block explicitly cross-origin requests from other domains.
+$allowed_origins = [
+    'https://resume.tobyziegler.com',
+    'http://resume.tobyziegler.com',   // in case HTTP is used locally
+    '',                                 // same-origin: no Origin header sent
+];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-if ($origin === $allowed_origin) {
-    header('Access-Control-Allow-Origin: ' . $allowed_origin);
+if (in_array($origin, $allowed_origins)) {
+    if ($origin !== '') {
+        header('Access-Control-Allow-Origin: ' . $origin);
+    }
 } else {
-    // Reject cross-origin requests
     http_response_code(403);
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'Forbidden']);
+    echo json_encode(['error' => 'Forbidden: unexpected origin']);
     exit;
 }
 

@@ -581,8 +581,15 @@
             padding: 1.6rem 1.8rem;
             color: #C97A82;
             font-size: 0.92rem;
+            line-height: 1.6;
         }
         #fit-error.visible { display: block; }
+        #fit-error-detail {
+            margin-top: 0.4rem;
+            font-size: 0.82rem;
+            color: rgba(201, 122, 130, 0.7);
+            font-family: monospace;
+        }
 
         /* ─── Resume Content ────────────────────────────────── */
         #resume {
@@ -622,7 +629,7 @@
         /* Sidebar nav */
         .resume-sidebar {
             position: sticky;
-            top: 6rem;
+            top: 5.5rem;
         }
         .resume-sidebar-nav {
             list-style: none;
@@ -652,7 +659,7 @@
         /* Resume sections */
         .resume-section {
             margin-bottom: 3.5rem;
-            scroll-margin-top: 6rem;
+            scroll-margin-top: 5.5rem;
         }
         .resume-section:last-child { margin-bottom: 0; }
 
@@ -766,6 +773,12 @@
             font-weight: 500;
             color: var(--text);
         }
+        .portfolio-link {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .portfolio-link:hover { color: var(--accent-green); }
         .portfolio-year {
             font-size: 0.82rem;
             letter-spacing: 0.06em;
@@ -990,6 +1003,7 @@
         <!-- Error -->
         <div id="fit-error">
             <p>Something went wrong with the assessment. Please try again in a moment.</p>
+            <p id="fit-error-detail"></p>
         </div>
 
         <!-- Result -->
@@ -1165,7 +1179,9 @@
 
                     <article class="portfolio-entry">
                         <div class="portfolio-header">
-                            <div class="portfolio-title">Dad-a-Base</div>
+                            <div class="portfolio-title">
+                                <a href="https://dadabase.tobyziegler.com" target="_blank" rel="noopener" class="portfolio-link">Dad-a-Base ↗</a>
+                            </div>
                             <div class="portfolio-year">2025</div>
                         </div>
                         <div class="portfolio-subtitle">dadabase.tobyziegler.com</div>
@@ -1179,7 +1195,9 @@
 
                     <article class="portfolio-entry">
                         <div class="portfolio-header">
-                            <div class="portfolio-title">Toby's Study</div>
+                            <div class="portfolio-title">
+                                <a href="https://tobyziegler.com" target="_blank" rel="noopener" class="portfolio-link">Toby's Study ↗</a>
+                            </div>
                         </div>
                         <div class="portfolio-subtitle">tobyziegler.com</div>
                         <ul class="portfolio-bullets">
@@ -1321,7 +1339,9 @@ async function runAssessment() {
     } catch (err) {
         console.error('Fit tool error:', err);
         document.getElementById('fit-loading').classList.remove('visible');
-        document.getElementById('fit-error').classList.add('visible');
+        const errEl = document.getElementById('fit-error');
+        errEl.classList.add('visible');
+        document.getElementById('fit-error-detail').textContent = err.message || '';
     } finally {
         btnAssess.disabled = false;
     }

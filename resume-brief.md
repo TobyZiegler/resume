@@ -6,24 +6,72 @@
 
 ## Current Status
 
-**Phase:** Pre-build. System prompt profile document in progress. No code written yet.
+**Phase:** Initial build complete. Deployed files ready. Troubleshooting and polish pass next.
 
 **Decisions made:**
 - Single-page architecture
-- AI fit tool prominent above the résumé content
+- AI fit tool prominent above the résumé content, dark section treatment
 - Paste-only for job descriptions (PDF upload deferred to later polish pass)
 - Shares tobyziegler.com visual identity: Fraunces + DM Sans, Classic Study palette, pill-button component language
+- CSS kept per-subdomain (not shared via assets subdomain) — revisit when portfolio has 4–5 rooms
+- `fit.php` as server-side proxy for Anthropic API (same pattern as `categorize.php` in Dad-a-Base)
+
+**Files in this build:**
+- `index.php` — the full resume page, AI fit tool UI, all CSS and JS inline
+- `fit.php` — server-side Anthropic API proxy; reads `ANTHROPIC_API_KEY` from `db.php`
+- `db.php` — credentials file, created manually on server, **never committed** (same pattern as Dad-a-Base)
+
+**Known issues / next session:**
+- [ ] Verify `fit.php` is working on the live server — if the error message shows on assessment, check: (1) `db.php` exists with `ANTHROPIC_API_KEY` defined, (2) cURL outbound is allowed on the plan, (3) API key has credits
+- [ ] Manager perspective stories still TBD — add to system prompt in `fit.php` when written
+- [ ] Link from tobyziegler.com main site nav not yet added
+- [ ] PDF upload support deferred — add after core functionality confirmed working
+- [ ] Consider rate-limiting `fit.php` (currently open; low-traffic risk acceptable for now)
 
 **Next steps when resuming:**
-1. Finish collecting profile stories (capstone project, manager stories TBD)
-2. Finalize the "known information" document
-3. Build the page
+1. Deploy `index.php` and `fit.php` to `resume.tobyziegler.com` document root
+2. Create `db.php` on server with `ANTHROPIC_API_KEY` (same format as Dad-a-Base `db.php`)
+3. Test the fit tool with a real job description — check browser console and the error detail shown on screen if it fails
+4. Add nav link + contextual link from tobyziegler.com main site
+5. Write manager perspective stories and add to `fit.php` system prompt
+
+---
+
+## Deployment Checklist
+
+```
+resume.tobyziegler.com/
+├── index.php        ← deploy via Git
+├── fit.php          ← deploy via Git
+└── db.php           ← create manually on server (NEVER commit)
+```
+
+`db.php` needs only one constant for this project:
+```php
+<?php
+define('ANTHROPIC_API_KEY', 'sk-ant-...');
+```
+(No database needed for the resume subdomain — unlike Dad-a-Base, there's no MySQL dependency.)
+
+---
+
+## Diagnosing the Fit Tool
+
+If "Assess the fit" shows an error on the live server:
+
+1. **Open browser DevTools → Network tab** — look at the `fit.php` request
+2. **Check the response body** — `fit.php` returns JSON error messages with detail
+3. Common causes (same as Dad-a-Base categorize.php):
+   - `db.php` missing or `ANTHROPIC_API_KEY` not defined → 500 error
+   - Bad/expired API key → 502 with "401" in message
+   - No API credits → 502 with "400" or "402" in message
+   - cURL blocked by host → 502 with cURL error string
 
 ---
 
 ## The "Known Information" Document
 
-*This is the briefing document that lives in the AI fit tool's system prompt. It is a work in progress — add to it as new stories and details are gathered.*
+*This is the briefing document that lives in the AI fit tool's system prompt inside `fit.php`. Update `fit.php` directly when adding new stories.*
 
 ### Core Identity
 
@@ -96,38 +144,18 @@ Critically: he saved every digital file, even though his boss saw no need.
 When direct-to-digital imaging equipment arrived, he had a complete library ready. With his guidance and insistence, the department developed a repository of originals and a coordinating repository of production PDFs, then converted the entire workflow to PDF-based production. Eventually the process was automated to convert customer-submitted Word and other files to production PDFs before any human reviewed them.
 
 **What this demonstrates:**
-- Building a department from scratch under genuinely difficult conditions
-- Saving files nobody told him to save because he understood where technology was going — systems architect instinct operating years ahead of organizational consensus
-- Leading multiple complete workflow transformations over decades: film → digital → imagesetter → direct imaging → PDF → automated pre-processing
-- Process engineering: removing a class of human error from the front of the pipeline
-- The same instinct that appears in every other story: identify the inefficiency, build the system, own it
+- Self-direction under pressure with no playbook
+- Long-horizon thinking: saving files nobody asked him to save, that proved invaluable years later
+- Owning a transformation end-to-end across multiple technology generations
+- Workflow automation instincts that predate formal engineering training
 
 ---
 
-#### The Template Library — Sweetheart Cup Company
+#### The Raspberry Pi Capstone — OTC
 
-As the newest artist at Sweetheart Cup, Toby found that every new cup design required starting with a size-specific box and running through half a dozen processing steps to produce a curved art-ready file suitable for printing and forming.
+For his capstone project, Toby designed and built a campus-wide digital signage system for Ozarks Technical Community College using Raspberry Pi hardware. The system used DNS addressing, shell scripting, and hierarchical device management — addressable by campus, building, and individual device, with both scheduled content and emergency broadcast modes.
 
-He consolidated all the repeatable steps, completed them once for each product size, and saved the results as templates. Key design decisions: templates opened as untitled documents (protecting the original, forcing appropriate naming and correct file hierarchy placement). For most product sizes, he reduced the setup process to a single step.
-
-He eventually built and maintained templates for all 100+ product sizes, updating and fixing them as products changed. During approximately three years at Sweetheart, working 60-80 hour weeks, he produced thousands of cups from hundreds of original base designs.
-
-**What this demonstrates:**
-- The throughline pattern at its earliest and most instinctive — he was the newest person in the room and still built the system everyone used
-- Sophisticated template architecture: protecting originals, enforcing naming conventions, managing file hierarchy through design rather than policy
-- The same thinking behind the CoxHealth PDF pipeline, built years later: making it structurally difficult for people to make mistakes
-- Ownership at scale: built the system AND maintained it
-- Volume and stamina: thousands of original designs, sustained over years
-
----
-
-#### The Capstone Project — OTC Digital Signage System
-
-For his Computer Information Science capstone at Ozarks Technical Community College, Toby approached multiple community organizations looking for a real problem worth solving. He found it in the OTC IT department, where the chair had three Raspberry Pi computers he wanted to put to meaningful use. After several conversations exploring options, they settled on a campus-wide digital announcement system delivered over the existing television infrastructure.
-
-Toby designed and built a system using DNS addressing and shell scripting that could deliver scheduled announcements and switch to emergency broadcasts on demand. The system was hierarchically addressable — by campus, building, or individual device — giving administrators granular control over message delivery. Everything was built, tested, and demonstrated in a classroom trial before Thanksgiving break.
-
-He was part of a three-person team. One member contributed minimally. The other volunteered to handle documentation and project trail — assuring Toby weekly that everything was on track. Three days before the final presentation, Toby discovered this teammate had never heard of a Gantt chart, despite it being a stated deliverable from day one. With Toby handling all development, testing, client contact, IT liaison work, and presentation construction, he had trusted the one thing he'd delegated without being able to verify it.
+He was part of a three-person team. One member contributed minimally. The other volunteered to handle documentation and project trail — assuring Toby weekly that everything was on track. Three days before the final presentation, Toby discovered this teammate had never heard of a Gantt chart, despite it being a stated deliverable from day one.
 
 Over Thanksgiving break, someone from IT deleted all server files and locked down the classroom network. Toby slept nine hours total between Monday morning discovery and Thursday afternoon presentation. He rebuilt and reconfigured everything from scratch. All three team members presented. His portion worked. It covered for the other two.
 
@@ -135,39 +163,24 @@ The system was a demonstrated success. The following semester, the department ch
 
 **What this demonstrates:**
 - Real client engagement: identified a genuine need, not a classroom exercise
-- Sophisticated technical architecture: DNS addressing, shell scripting, hierarchical device management, scheduled and emergency broadcast modes on Raspberry Pi hardware
+- Sophisticated technical architecture on constrained hardware
 - Crisis recovery under extreme conditions: full rebuild in under four days after catastrophic environment loss
 - Carrying a team while constrained from verifying delegated work
-- Technical instincts that predate the AI methodology — networked systems on constrained hardware, built before AI-assisted development was available
 - A recurring pattern: built something that worked, lost to organizational forces outside his control
 
 ---
 
 #### The AI Engineering Pivot — Current
 
-Toby has known since the 1980s that AI was coming. When Apple released a video describing an AI-assisted future, his reaction wasn't skepticism — it was recognition. Someone else got it too. He assumed most people would dismiss it as science fiction. They did. He didn't.
+Toby has known since the 1980s that AI was coming. He'd left aerospace engineering near the end of his junior year — pivoting to graphic design after an internship with American Airlines put a Macintosh in his hands and changed everything. The university's design program was still analog. So he taught himself. Small jobs, temp work, every spare hour at the library. It worked.
 
-What he couldn't have predicted was that the path into that future would be closed to him by the time it arrived. He'd left aerospace engineering near the end of his junior year — pivoting to graphic design after an internship with American Airlines put a Macintosh in his hands and changed everything. The university's design program was still analog. Photoshop, Illustrator, and QuarkXPress were already industry standard; the school offered one Photoshop class. So he taught himself. Small jobs, temp work, every spare hour at the library. It worked. He's been a professional designer ever since.
-
-Decades later, he tried to combine that design career with the computing credentials he'd accumulated and pivot into UI/UX development. He couldn't find takers. Age discrimination, opaque hiring processes, skills exam thresholds he couldn't clear without the junior-level experience those same processes prevented him from getting. He interviewed well for positions during CoxHealth's Epic EMR transition — 80 engineers and developers hired — and never received the promised second interview.
-
-He had largely concluded that meaningful participation in the AI future he'd anticipated for forty years was closed to him.
+Decades later, he tried to combine that design career with the computing credentials he'd accumulated and pivot into UI/UX development. He couldn't find takers. Age discrimination, opaque hiring processes, skills exam thresholds he couldn't clear without the junior-level experience those same processes prevented him from getting.
 
 Then he learned how the most progressive AI companies are actually working: not asking engineers to write code, but curating prompts — writing long capability specifications, letting the AI make choices, guiding overall results toward a desired outcome. Engineers who understand code deeply but aren't coding. Fully functional software produced through prompting and interaction alone.
 
-It was, in his words, a screeching, glass-breaking moment.
+He applied the methodology to the Dad-a-Base and it worked. Full-stack PHP/MySQL/JavaScript web application with AI-powered categorization, bulk import/export, a moderation system, and database-backed authentication — conceived, directed, troubleshot, and deployed without writing a single line of code by hand.
 
-He had been turning over the idea for the Dad-a-Base for a while, had started coding pieces of it several times, and never liked where it was heading. He approached it from scratch using the new methodology, genuinely uncertain whether he had what it took. The result is a full-stack PHP/MySQL/JavaScript web application with AI-powered categorization, bulk import/export, a moderation system, and database-backed authentication — conceived, directed, troubleshot, and deployed without writing a single line of code by hand.
-
-His framing of what happened: *"This feels a lot like teaching myself graphic design back in the day. I don't need the degrees, no matter how much or little they help, I just need experience. I just need a chance. So I am making one."*
-
-This is not a pivot born of desperation. It is the same move he made forty years ago — identifying the path that fits how he actually works, teaching himself, and building proof.
-
-**What this adds to the profile:**
-- Strategic understanding of the AI engineering landscape, not just personal enthusiasm
-- A demonstrated pattern of self-directed professional reinvention with a successful prior example
-- Intellectual honesty about the path: he knows the portfolio is early, he knows the methodology is still being validated, and he's building in public rather than waiting for permission
-- The conviction has forty years of history behind it — this is not a recent bandwagon
+His framing: *"This feels a lot like teaching myself graphic design back in the day. I don't need the degrees, no matter how much or little they help, I just need experience. I just need a chance. So I am making one."*
 
 *Manager perspective stories to be added.*
 
@@ -175,11 +188,11 @@ This is not a pivot born of desperation. It is the same move he made forty years
 
 ### An Honest Pattern Worth Naming
 
-Across multiple stories, Toby built things that worked and were recognized as working — then watched them end due to forces entirely outside his control. New management ended the CMN checks. The capstone system's champions left. Years of UI/UX attempts hit age discrimination and opaque hiring gatekeeping. A promising Epic transition interview produced no second interview despite strong signals.
+Across multiple stories, Toby built things that worked and were recognized as working — then watched them end due to forces entirely outside his control. New management ended the CMN checks. The capstone system's champions left. Years of UI/UX attempts hit age discrimination and opaque hiring gatekeeping.
 
 The through line is not failure. His work consistently outlasted the organizational will to sustain it — which is a different thing. The print shop workflow transformation still runs. The forms committee governance structure grew to ISO 9001 compliance. The template library served Sweetheart until the company itself closed.
 
-**For the AI fit tool's calibration:** Organizations that appear stable, mission-driven, and technically forward-looking are worth flagging positively. Roles that look like environments where good work might be abandoned by the next management shuffle are worth noting honestly. Toby builds things that work — whether the organization keeps them running is a separate question.
+**For the AI fit tool's calibration:** Organizations that appear stable, mission-driven, and technically forward-looking are worth flagging positively. Roles that look like environments where good work might be abandoned by the next management shuffle are worth noting honestly.
 
 ---
 
@@ -214,12 +227,13 @@ The through line is not failure. His work consistently outlasted the organizatio
 
 The resume site shares the tobyziegler.com visual identity:
 - **Typography:** Fraunces (display) + DM Sans (body) — non-negotiable
-- **Palette:** Classic Study — warm parchment, espresso brown, forest green, burgundy/oxblood
+- **Palette:** Classic Study — warm parchment (`#F5F0E8`), espresso (`#2C1F14`), forest green (`#3A5C3B`), burgundy (`#7B2D3A`)
 - **Components:** Pill-button style, generous whitespace, warm editorial minimalism
+- **Dark section:** `#1C1712` for the AI fit tool, consistent with main site dark treatments
 - **Voice:** Warm, confident, honest — not corporate, not defensive
 
 The AI fit tool should feel like Toby handed you his résumé in person and offered to walk you through it, not like a PDF spat out of a template.
 
 ---
 
-*Last updated: March 2026 — profile stories in progress, no code written yet.*
+*Last updated: March 2026 — initial build complete, deploying and testing next.*
