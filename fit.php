@@ -20,26 +20,21 @@ require_once __DIR__ . '/db.php';   // defines ANTHROPIC_API_KEY
 // Only block explicitly cross-origin requests from other domains.
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-$allowed_origins = [
-    'https://resume.tobyziegler.com',
-    'http://resume.tobyziegler.com',
-    '',
-];
+// Allow any request from tobyziegler.com or no origin (same-site)
+$isTrusted = ($origin === '' || 
+              $origin === 'https://resume.tobyziegler.com' ||
+              $origin === 'http://resume.tobyziegler.com' ||
+              str_ends_with($origin, '.tobyziegler.com'));
 
-// Normalize: strip trailing slash just in case
-$originNorm = rtrim($origin, '/');
-
-if (!in_array($originNorm, $allowed_origins)) {
-    // TEMPORARY DIAGNOSTIC — remove after confirming the fix
+if (!$isTrusted) {
     http_response_code(403);
     header('Content-Type: application/json');
-    echo json_encode([
-        'error'           => 'Forbidden: unexpected origin',
-        'received_origin' => $origin,          // ← see what's actually arriving
-        'server_name'     => $_SERVER['SERVER_NAME'] ?? 'unknown',
-        'request_uri'     => $_SERVER['REQUEST_URI'] ?? 'unknown',
-    ]);
+    echo json_encode(['error' => 'Forbidden: unexpected origin']);
     exit;
+}
+
+if ($origin !== '') {
+    header('Access-Control-Allow-Origin: ' . $origin);
 }
 
 header('Content-Type: application/json');
