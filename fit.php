@@ -18,21 +18,27 @@ require_once __DIR__ . '/db.php';   // defines ANTHROPIC_API_KEY
 // ─── CORS — allow same-site and the resume subdomain ─────
 // Browsers omit the Origin header for same-origin requests.
 // Only block explicitly cross-origin requests from other domains.
-$allowed_origins = [
-    'https://resume.tobyziegler.com',
-    'http://resume.tobyziegler.com',   // in case HTTP is used locally
-    '',                                 // same-origin: no Origin header sent
-];
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-if (in_array($origin, $allowed_origins)) {
-    if ($origin !== '') {
-        header('Access-Control-Allow-Origin: ' . $origin);
-    }
-} else {
+$allowed_origins = [
+    'https://resume.tobyziegler.com',
+    'http://resume.tobyziegler.com',
+    '',
+];
+
+// Normalize: strip trailing slash just in case
+$originNorm = rtrim($origin, '/');
+
+if (!in_array($originNorm, $allowed_origins)) {
+    // TEMPORARY DIAGNOSTIC — remove after confirming the fix
     http_response_code(403);
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'Forbidden: unexpected origin']);
+    echo json_encode([
+        'error'           => 'Forbidden: unexpected origin',
+        'received_origin' => $origin,          // ← see what's actually arriving
+        'server_name'     => $_SERVER['SERVER_NAME'] ?? 'unknown',
+        'request_uri'     => $_SERVER['REQUEST_URI'] ?? 'unknown',
+    ]);
     exit;
 }
 
