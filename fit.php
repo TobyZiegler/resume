@@ -18,18 +18,29 @@ require_once __DIR__ . '/db.php';   // defines ANTHROPIC_API_KEY
 // ─── CORS — allow same-site and the resume subdomain ─────
 // Browsers omit the Origin header for same-origin requests.
 // Only block explicitly cross-origin requests from other domains.
+// Note: Namecheap's proxy may strip the scheme, sending bare hostnames.
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
-// Allow any request from tobyziegler.com or no origin (same-site)
-$isTrusted = ($origin === '' || 
-              $origin === 'https://resume.tobyziegler.com' ||
-              $origin === 'http://resume.tobyziegler.com' ||
-              str_ends_with($origin, '.tobyziegler.com'));
+// Allow any request from tobyziegler.com (any scheme or bare),
+// any subdomain thereof, or no origin at all (same-site request).
+$isTrusted = (
+    $origin === '' ||
+    $origin === 'https://tobyziegler.com' ||
+    $origin === 'http://tobyziegler.com' ||
+    $origin === 'tobyziegler.com' ||
+    $origin === 'https://resume.tobyziegler.com' ||
+    $origin === 'http://resume.tobyziegler.com' ||
+    $origin === 'resume.tobyziegler.com' ||
+    str_ends_with($origin, '.tobyziegler.com')
+);
 
 if (!$isTrusted) {
     http_response_code(403);
     header('Content-Type: application/json');
-    echo json_encode(['error' => 'Forbidden: unexpected origin']);
+    echo json_encode([
+        'error'           => 'Forbidden: unexpected origin',
+        'received_origin' => $origin,
+    ]);
     exit;
 }
 
@@ -46,7 +57,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(204);
     exit;
 }
-
 // ─── Only accept POST ────────────────────────────────────
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
