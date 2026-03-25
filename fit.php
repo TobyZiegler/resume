@@ -39,7 +39,6 @@ if (!$isTrusted) {
     header('Content-Type: application/json');
     echo json_encode([
         'error'           => 'Forbidden: unexpected origin',
-        'received_origin' => $origin,
     ]);
     exit;
 }

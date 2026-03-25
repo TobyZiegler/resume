@@ -104,6 +104,9 @@ If the tool shows an error on the live server, the error detail is displayed on 
 
 The same diagnostic pattern as `categorize.php` in the Dad-a-Base applies here.
 
+**Known Namecheap gotcha — HTTP_ORIGIN scheme stripping:**
+Namecheap's server proxy strips the scheme from the `Origin` header before PHP sees it, delivering bare hostnames like `tobyziegler.com` instead of the standard `https://tobyziegler.com`. The `$isTrusted` check in `fit.php` explicitly allows bare hostname variants for this reason. If a 403 appears and the diagnostic shows a bare hostname, this is why — do not remove the bare-hostname entries from the trusted origins list.
+
 ---
 
 ## Content — The Résumé Itself
@@ -133,7 +136,8 @@ The résumé layout uses a sticky sidebar nav with scroll-spy active states. Sid
 resume.tobyziegler.com/
 ├── index.php    ← deployed via Git
 ├── fit.php      ← deployed via Git
-└── db.php       ← created manually on server; NEVER commit
+├── db.php       ← created manually on server; NEVER commit
+└── shared.css   ← copied manually from master copy at tobyziegler.com
 ```
 
 `db.php` for this subdomain (no database needed):

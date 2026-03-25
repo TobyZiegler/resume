@@ -18,6 +18,7 @@
 
     <!-- Canonical -->
     <link rel="canonical" href="https://resume.tobyziegler.com" />
+    <link rel="stylesheet" href="shared.css">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -57,13 +58,12 @@
     <style>
         /* ─── CSS Variables ─────────────────────────────────── */
         :root {
-            --bg:           #F5F0E8;
-            --bg-section:   #EDE6D8;
-            --bg-dark:      #1C1712;
+            --bg-alt:   #EDE6D8;
+            /* --bg-dark:      #1C1712;
             --text:         #2C1F14;
             --text-muted:   #6B5744;
-            --accent-green: #3A5C3B;
-            --accent-burg:  #7B2D3A;
+            --green: #3A5C3B;
+            --burg:  #7B2D3A;
             --white-soft:   #FAF7F2;
             --rule:         rgba(44, 31, 20, 0.15);
             --rule-strong:  rgba(44, 31, 20, 0.28);
@@ -73,56 +73,9 @@
 
             --radius-pill:  1.4em;
             --shadow-card:  0 2px 16px rgba(44, 31, 20, 0.08), 0 1px 3px rgba(44, 31, 20, 0.06);
-            --shadow-lift:  0 8px 32px rgba(44, 31, 20, 0.13), 0 2px 8px rgba(44, 31, 20, 0.08);
+            --shadow-lift:  0 8px 32px rgba(44, 31, 20, 0.13), 0 2px 8px rgba(44, 31, 20, 0.08); */
         }
 
-        /* ─── Reset & Base ──────────────────────────────────── */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: var(--font-body);
-            font-size: clamp(15px, 1.1vw + 0.5rem, 20px);
-            line-height: 1.65;
-            -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
-        }
-
-        /* Noise texture */
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.04;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-            background-size: 200px 200px;
-        }
-
-        /* ─── Keyframes ─────────────────────────────────────── */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(1.2rem); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to   { opacity: 1; }
-        }
-        @keyframes scaleIn {
-            from { transform: scaleX(0); }
-            to   { transform: scaleX(1); }
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-0.5rem); max-height: 0; }
-            to   { opacity: 1; transform: translateY(0); max-height: 2000px; }
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
 
         /* ─── Nav ───────────────────────────────────────────── */
         nav {
@@ -170,7 +123,7 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-        .nav-links a:hover { color: var(--accent-green); }
+        .nav-links a:hover { color: var(--green); }
 
         /* ─── Pill Buttons ──────────────────────────────────── */
         .btn-primary {
@@ -178,14 +131,14 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.48rem 1.5rem;
-            background: var(--accent-green);
+            background: var(--green);
             color: var(--white-soft);
             font-family: var(--font-body);
             font-size: 0.95rem;
             font-weight: 600;
             letter-spacing: 0.03em;
             text-decoration: none;
-            border: 2px solid var(--accent-green);
+            border: 2px solid var(--green);
             border-radius: var(--radius-pill);
             transition: background 0.22s, color 0.22s, transform 0.18s;
             cursor: pointer;
@@ -193,7 +146,7 @@
         }
         .btn-primary:hover {
             background: transparent;
-            color: var(--accent-green);
+            color: var(--green);
             transform: translateY(-2px);
         }
         .btn-secondary {
@@ -235,7 +188,7 @@
         .eyebrow-line {
             width: 2rem;
             height: 1.5px;
-            background: var(--accent-green);
+            background: var(--green);
             flex-shrink: 0;
         }
         .eyebrow-text {
@@ -244,7 +197,7 @@
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--accent-green);
+            color: var(--green);
         }
         .section-heading {
             font-family: var(--font-display);
@@ -257,7 +210,7 @@
         }
         .section-heading em {
             font-style: italic;
-            color: var(--accent-green);
+            color: var(--green);
         }
 
         /* ─── Hero ──────────────────────────────────────────── */
@@ -301,8 +254,8 @@
             opacity: 0;
             animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) 0.5s forwards;
         }
-        .hero-headline em { font-style: italic; color: var(--accent-green); }
-        .hero-headline .burg { font-style: italic; color: var(--accent-burg); }
+        .hero-headline em { font-style: italic; color: var(--green); }
+        .hero-headline .burg { font-style: italic; color: var(--burg); }
         .hero-sub {
             max-width: 560px;
             font-size: 1.1rem;
@@ -330,7 +283,7 @@
             align-items: center;
             gap: 0.4rem;
         }
-        .hero-meta-item span { color: var(--accent-green); font-style: italic; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
+        .hero-meta-item span { color: var(--green); font-style: italic; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
         .hero-actions {
             display: flex;
             align-items: center;
@@ -379,7 +332,7 @@
         .fit-eyebrow-line {
             width: 2rem;
             height: 1.5px;
-            background: var(--accent-green);
+            background: var(--green);
             flex-shrink: 0;
         }
         .fit-eyebrow-text {
@@ -387,7 +340,7 @@
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--accent-green);
+            color: var(--green);
         }
         .fit-heading {
             font-family: var(--font-display);
@@ -448,20 +401,20 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.52rem 1.6rem;
-            background: var(--accent-green);
+            background: var(--green);
             color: var(--white-soft);
             font-family: var(--font-body);
             font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.04em;
-            border: 2px solid var(--accent-green);
+            border: 2px solid var(--green);
             border-radius: var(--radius-pill);
             cursor: pointer;
             transition: background 0.2s, color 0.2s, transform 0.18s;
         }
         .btn-assess:hover:not(:disabled) {
             background: transparent;
-            color: var(--accent-green);
+            color: var(--green);
             transform: translateY(-2px);
         }
         .btn-assess:disabled {
@@ -517,7 +470,7 @@
             font-weight: 700;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--accent-green);
+            color: var(--green);
             margin-bottom: 0.6rem;
             display: flex;
             align-items: center;
@@ -563,7 +516,7 @@
         }
         .loading-dots span {
             width: 8px; height: 8px;
-            background: var(--accent-green);
+            background: var(--green);
             border-radius: 50%;
             animation: pulse 1.4s ease-in-out infinite;
         }
@@ -598,7 +551,7 @@
 
         /* Summary strip */
         .resume-summary {
-            background: var(--bg-section);
+            background: var(--bg-alt);
             border-radius: 0.75rem;
             padding: 2.4rem 2.8rem;
             margin-bottom: 4rem;
@@ -652,8 +605,8 @@
         }
         .resume-sidebar-nav a:hover,
         .resume-sidebar-nav a.active {
-            color: var(--accent-green);
-            border-left-color: var(--accent-green);
+            color: var(--green);
+            border-left-color: var(--green);
         }
 
         /* Resume sections */
@@ -682,7 +635,7 @@
         }
         @media (max-width: 500px) { .competency-grid { grid-template-columns: 1fr; } }
         .competency-item {
-            background: var(--bg-section);
+            background: var(--bg-alt);
             border: 1px solid var(--rule);
             border-radius: 0.5rem;
             padding: 1rem 1.2rem;
@@ -692,7 +645,7 @@
             font-style: italic;
             font-size: 0.95rem;
             font-weight: 500;
-            color: var(--accent-green);
+            color: var(--green);
             margin-bottom: 0.2rem;
         }
         .competency-desc {
@@ -735,7 +688,7 @@
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: var(--accent-green);
+            color: var(--green);
             margin-bottom: 0.7rem;
         }
         .experience-bullets {
@@ -751,7 +704,7 @@
 
         /* Portfolio */
         .portfolio-entry {
-            background: var(--bg-section);
+            background: var(--bg-alt);
             border: 1px solid var(--rule);
             border-radius: 0.6rem;
             padding: 1.4rem 1.6rem;
@@ -778,7 +731,7 @@
             text-decoration: none;
             transition: color 0.2s;
         }
-        .portfolio-link:hover { color: var(--accent-green); }
+        .portfolio-link:hover { color: var(--green); }
         .portfolio-year {
             font-size: 0.82rem;
             letter-spacing: 0.06em;
@@ -788,7 +741,7 @@
             font-size: 0.82rem;
             font-weight: 500;
             letter-spacing: 0.04em;
-            color: var(--accent-burg);
+            color: var(--burg);
             margin-bottom: 0.7rem;
         }
         .portfolio-bullets {
@@ -831,7 +784,7 @@
         }
         .education-degree strong {
             font-weight: 600;
-            color: var(--accent-green);
+            color: var(--green);
             font-size: 0.8rem;
             letter-spacing: 0.05em;
             text-transform: uppercase;
