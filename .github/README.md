@@ -1,1 +1,1 @@
-README-resume.md
+../README-resume.md
