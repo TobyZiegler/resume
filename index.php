@@ -28,7 +28,7 @@
       "name": "Toby Ziegler",
       "url": "https://tobyziegler.com",
       "sameAs": ["https://linkedin.com/in/tobyziegler"],
-      "jobTitle": "Graphic Designer, Document Manager & AI Engineer",
+      "jobTitle": "Graphic Designer, Document Manager & AI Engineering Practitioner",
       "worksFor": {
         "@type": "Organization",
         "name": "CoxHealth"
@@ -53,27 +53,42 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet" />
 
     <style>
         /* ─── CSS Variables ─────────────────────────────────── */
+        /* Tokens must match shared.css v2.4. Never redefine     */
+        /* a token that shared.css already provides.             */
         :root {
-            --bg-alt:   #EDE6D8;
-            /* --bg-dark:      #1C1712;
+            --bg:           #F5F0E8;
+            --bg-alt:       #EDE6D8;
+            --bg-dark:      #1C1712;
+            --white-soft:   #FAF7F2;
             --text:         #2C1F14;
             --text-muted:   #6B5744;
-            --green: #3A5C3B;
-            --burg:  #7B2D3A;
-            --white-soft:   #FAF7F2;
+            --green:        #3A5C3B;
+            --burg:         #7B2D3A;
             --rule:         rgba(44, 31, 20, 0.15);
             --rule-strong:  rgba(44, 31, 20, 0.28);
 
-            --font-display: 'Fraunces', serif;
+            --font-display: 'Lora', Georgia, serif;
             --font-body:    'DM Sans', sans-serif;
 
-            --radius-pill:  1.4em;
+            --radius-sm:    0.4rem;
+            --radius:       1.0rem;
+            --radius-lg:    1.75rem;
+            --radius-pill:  1.25rem;
             --shadow-card:  0 2px 16px rgba(44, 31, 20, 0.08), 0 1px 3px rgba(44, 31, 20, 0.06);
-            --shadow-lift:  0 8px 32px rgba(44, 31, 20, 0.13), 0 2px 8px rgba(44, 31, 20, 0.08); */
+            --shadow-lift:  0 8px 32px rgba(44, 31, 20, 0.13), 0 2px 8px rgba(44, 31, 20, 0.08);
+            --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            --pad-page:     max(2.5rem, 7vw);
+
+            /* Type scale — root font-size is fluid: clamp(16px, 1.25vw + 0.5rem, 26px) */
+            --text-xs:      1.0rem;
+            --text-sm:      1.1rem;
+            --text-base:    1.3rem;
+            --text-body:    1.6rem;
+            --text-lg:      2.0rem;
         }
 
 
@@ -82,7 +97,7 @@
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
-            padding: 1.2rem 3rem;
+            padding: 1.2rem var(--pad-page);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -97,7 +112,7 @@
         .nav-logo {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.35rem;
+            font-size: var(--text-base);   /* 1.3rem */
             font-weight: 400;
             color: var(--text);
             text-decoration: none;
@@ -115,88 +130,38 @@
         }
         .nav-links a {
             font-family: var(--font-body);
-            font-size: 0.95rem;
+            font-size: var(--text-sm);   /* 1.1rem — nav label size */
             font-weight: 500;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color var(--transition);
         }
         .nav-links a:hover { color: var(--green); }
 
         /* ─── Pill Buttons ──────────────────────────────────── */
-        .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.48rem 1.5rem;
-            background: var(--green);
-            color: var(--white-soft);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 0.03em;
-            text-decoration: none;
-            border: 2px solid var(--green);
-            border-radius: var(--radius-pill);
-            transition: background 0.22s, color 0.22s, transform 0.18s;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .btn-primary:hover {
-            background: transparent;
-            color: var(--green);
-            transform: translateY(-2px);
-        }
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.48rem 1.5rem;
-            background: transparent;
-            color: var(--text);
-            font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 500;
-            letter-spacing: 0.03em;
-            text-decoration: none;
-            border: 2px solid var(--rule-strong);
-            border-radius: var(--radius-pill);
-            transition: border-color 0.22s, color 0.22s, transform 0.18s;
-            cursor: pointer;
-            white-space: nowrap;
-        }
-        .btn-secondary:hover {
-            border-color: var(--text);
-            color: var(--text);
-            transform: translateY(-2px);
-        }
+        /* .btn-primary and .btn-secondary are defined in shared.css. */
+        /* No local overrides needed — use the shared classes directly. */
 
-        /* ─── Section Layout Helpers ────────────────────────── */
+        /* ─── Eyebrow & Section Heading ─────────────────────── */
+        /* .eyebrow, .eyebrow-line, .eyebrow-text defined in shared.css. */
+        /* .section-heading is page-specific. */
         .section-inner {
             max-width: 900px;
             margin: 0 auto;
-            padding: 0 2rem;
         }
-        .eyebrow {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            color: var(--text);
+            margin-bottom: 1rem;
         }
-        .eyebrow-line {
-            width: 2rem;
-            height: 1.5px;
-            background: var(--green);
-            flex-shrink: 0;
-        }
-        .eyebrow-text {
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
+        .section-heading em {
+            font-style: italic;
             color: var(--green);
         }
         .section-heading {
@@ -219,9 +184,11 @@
             min-height: 56vh;
             display: flex;
             align-items: center;
-            padding: 8rem 3rem 5rem;
+            padding: 8rem var(--pad-page) 5rem;
             overflow: hidden;
         }
+        /* Eyebrow inside hero needs bottom margin — shared.css doesn't set this */
+        #hero .eyebrow { margin-bottom: 1.2rem; }
         .hero-watermark {
             position: absolute;
             top: -0.1em;
@@ -258,7 +225,7 @@
         .hero-headline .burg { font-style: italic; color: var(--burg); }
         .hero-sub {
             max-width: 560px;
-            font-size: 1.1rem;
+            font-size: var(--text-body);   /* 1.6rem — fluid body size */
             line-height: 1.7;
             color: var(--text-muted);
             margin-bottom: 2.4rem;
@@ -274,7 +241,7 @@
             animation: fadeUp 0.7s ease 1.1s forwards;
         }
         .hero-meta-item {
-            font-size: 0.88rem;
+            font-size: var(--text-xs);   /* 1.0rem — meta label */
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -283,7 +250,7 @@
             align-items: center;
             gap: 0.4rem;
         }
-        .hero-meta-item span { color: var(--green); font-style: italic; font-family: var(--font-display); font-size: 1rem; letter-spacing: 0; text-transform: none; font-weight: 400; }
+        .hero-meta-item span { color: var(--green); font-style: italic; font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0; text-transform: none; font-weight: 400; }
         .hero-actions {
             display: flex;
             align-items: center;
@@ -294,7 +261,7 @@
         }
         .hero-rule {
             position: absolute;
-            bottom: 0; left: 3rem; right: 3rem;
+            bottom: 0; left: var(--pad-page); right: var(--pad-page);
             height: 1px;
             background: var(--rule);
             transform: scaleX(0);
@@ -306,7 +273,7 @@
         #fit-tool {
             background: var(--bg-dark);
             color: var(--white-soft);
-            padding: 5rem 3rem;
+            padding: 5rem var(--pad-page);
             position: relative;
             overflow: hidden;
         }
@@ -351,7 +318,7 @@
             color: var(--white-soft);
             margin-bottom: 0.8rem;
         }
-        .fit-heading em { font-style: italic; color: #8BAF6D; }
+        .fit-heading em { font-style: italic; color: #8BAF6D; /* --green lightened for dark bg */ }
         .fit-sub {
             font-size: 1rem;
             line-height: 1.65;
@@ -453,10 +420,11 @@
             letter-spacing: 0.08em;
             text-transform: uppercase;
         }
-        .fit-signal.strong   { background: rgba(58, 92, 59, 0.3); color: #8BAF6D; border: 1px solid rgba(58, 92, 59, 0.5); }
-        .fit-signal.moderate { background: rgba(180, 140, 60, 0.2); color: #C8A84B; border: 1px solid rgba(180, 140, 60, 0.4); }
-        .fit-signal.partial  { background: rgba(123, 45, 58, 0.2); color: #C97A82; border: 1px solid rgba(123, 45, 58, 0.35); }
-        .fit-signal.limited  { background: rgba(100, 100, 100, 0.2); color: #aaa; border: 1px solid rgba(100, 100, 100, 0.3); }
+        /* Fit signal badge colors — on-dark variants; no shared token exists for these */
+        .fit-signal.strong   { background: rgba(58, 92, 59, 0.3); color: #8BAF6D; border: 1px solid rgba(58, 92, 59, 0.5); }   /* --green derived */
+        .fit-signal.moderate { background: rgba(180, 140, 60, 0.2); color: #C8A84B; border: 1px solid rgba(180, 140, 60, 0.4); } /* warm gold — page-specific */
+        .fit-signal.partial  { background: rgba(123, 45, 58, 0.2); color: #C97A82; border: 1px solid rgba(123, 45, 58, 0.35); }  /* --burg derived */
+        .fit-signal.limited  { background: rgba(100, 100, 100, 0.2); color: #aaa; border: 1px solid rgba(100, 100, 100, 0.3); }  /* neutral gray — page-specific */
 
         .fit-result-body {
             padding: 1.6rem 1.8rem;
@@ -546,7 +514,7 @@
 
         /* ─── Resume Content ────────────────────────────────── */
         #resume {
-            padding: 5rem 3rem;
+            padding: 5rem var(--pad-page);
         }
 
         /* Summary strip */
@@ -592,7 +560,7 @@
         }
         .resume-sidebar-nav a {
             display: block;
-            font-size: 0.84rem;
+            font-size: var(--text-xs);   /* 1.0rem — compact sidebar label */
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -601,7 +569,7 @@
             padding: 0.35rem 0;
             border-left: 2px solid transparent;
             padding-left: 0.8rem;
-            transition: color 0.2s, border-color 0.2s;
+            transition: color var(--transition), border-color var(--transition);
         }
         .resume-sidebar-nav a:hover,
         .resume-sidebar-nav a.active {
@@ -618,7 +586,7 @@
 
         .resume-section-heading {
             font-family: var(--font-display);
-            font-size: 1.5rem;
+            font-size: var(--text-lg);   /* 2.0rem */
             font-weight: 400;
             font-style: italic;
             color: var(--text);
@@ -637,19 +605,19 @@
         .competency-item {
             background: var(--bg-alt);
             border: 1px solid var(--rule);
-            border-radius: 0.5rem;
+            border-radius: var(--radius-sm);
             padding: 1rem 1.2rem;
         }
         .competency-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 0.95rem;
+            font-size: var(--text-sm);   /* 1.1rem */
             font-weight: 500;
             color: var(--green);
             margin-bottom: 0.2rem;
         }
         .competency-desc {
-            font-size: 0.85rem;
+            font-size: var(--text-xs);   /* 1.0rem — card body; intentionally compact */
             line-height: 1.55;
             color: var(--text-muted);
         }
@@ -672,19 +640,19 @@
         .experience-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: var(--text-sm);   /* 1.1rem */
             font-weight: 500;
             color: var(--text);
         }
         .experience-date {
-            font-size: 0.82rem;
+            font-size: var(--text-xs);   /* 1.0rem — metadata label */
             font-weight: 500;
             letter-spacing: 0.06em;
             color: var(--text-muted);
             white-space: nowrap;
         }
         .experience-company {
-            font-size: 0.88rem;
+            font-size: var(--text-xs);   /* 1.0rem — company label */
             font-weight: 600;
             letter-spacing: 0.05em;
             text-transform: uppercase;
@@ -695,7 +663,7 @@
             padding-left: 1.1rem;
         }
         .experience-bullets li {
-            font-size: 0.92rem;
+            font-size: var(--text-xs);   /* 1.0rem — resume body copy; fluid root keeps this readable */
             line-height: 1.6;
             color: var(--text);
             margin-bottom: 0.35rem;
@@ -706,7 +674,7 @@
         .portfolio-entry {
             background: var(--bg-alt);
             border: 1px solid var(--rule);
-            border-radius: 0.6rem;
+            border-radius: var(--radius-sm);
             padding: 1.4rem 1.6rem;
             margin-bottom: 1.2rem;
         }
@@ -722,23 +690,23 @@
         .portfolio-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: var(--text-sm);   /* 1.1rem */
             font-weight: 500;
             color: var(--text);
         }
         .portfolio-link {
             color: inherit;
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color var(--transition);
         }
         .portfolio-link:hover { color: var(--green); }
         .portfolio-year {
-            font-size: 0.82rem;
+            font-size: var(--text-xs);   /* 1.0rem — year label */
             letter-spacing: 0.06em;
             color: var(--text-muted);
         }
         .portfolio-subtitle {
-            font-size: 0.82rem;
+            font-size: var(--text-xs);   /* 1.0rem — subtitle/URL line */
             font-weight: 500;
             letter-spacing: 0.04em;
             color: var(--burg);
@@ -748,7 +716,7 @@
             padding-left: 1.1rem;
         }
         .portfolio-bullets li {
-            font-size: 0.9rem;
+            font-size: var(--text-xs);   /* 1.0rem — portfolio body copy */
             line-height: 1.6;
             color: var(--text-muted);
             margin-bottom: 0.3rem;
@@ -764,18 +732,18 @@
         .education-school-name {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.05rem;
+            font-size: var(--text-sm);   /* 1.1rem */
             font-weight: 500;
             color: var(--text);
             margin-bottom: 0.15rem;
         }
         .education-location {
-            font-size: 0.82rem;
+            font-size: var(--text-xs);   /* 1.0rem — location metadata */
             color: var(--text-muted);
             margin-bottom: 0.7rem;
         }
         .education-degree {
-            font-size: 0.9rem;
+            font-size: var(--text-xs);   /* 1.0rem */
             line-height: 1.5;
             color: var(--text);
             margin-bottom: 0.25rem;
@@ -785,31 +753,31 @@
         .education-degree strong {
             font-weight: 600;
             color: var(--green);
-            font-size: 0.8rem;
+            font-size: 0.8rem;   /* page-specific — degree abbreviation badge, smaller than --text-xs intentionally */
             letter-spacing: 0.05em;
             text-transform: uppercase;
         }
-        .education-degree em { font-style: italic; color: var(--text-muted); font-size: 0.85rem; }
+        .education-degree em { font-style: italic; color: var(--text-muted); font-size: var(--text-xs); }
         .education-minor {
-            font-size: 0.82rem;
+            font-size: var(--text-xs);   /* 1.0rem */
             color: var(--text-muted);
             padding-left: 1rem;
             margin-top: 0.15rem;
         }
         .education-capstone {
             margin-top: 0.8rem;
-            font-size: 0.85rem;
+            font-size: var(--text-xs);   /* 1.0rem */
             color: var(--text-muted);
             font-style: italic;
             padding-left: 0.5rem;
-            border-left: 2px solid rgba(58,92,59,0.3);
+            border-left: 2px solid rgba(58, 92, 59, 0.3);   /* --green at 30% */
         }
 
         /* ─── Footer ────────────────────────────────────────── */
         footer {
             background: var(--bg-dark);
-            color: rgba(250,247,242,0.5);
-            padding: 3rem;
+            color: rgba(250, 247, 242, 0.5);   /* --white-soft at 50% */
+            padding: 3rem var(--pad-page);
             text-align: center;
         }
         .footer-inner {
@@ -819,7 +787,7 @@
         .footer-name {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.5rem;
+            font-size: var(--text-lg);   /* 2.0rem */
             font-weight: 300;
             color: var(--white-soft);
             margin-bottom: 0.6rem;
@@ -832,27 +800,24 @@
             margin-bottom: 1.5rem;
         }
         .footer-links a {
-            font-size: 0.85rem;
+            font-size: var(--text-sm);   /* 1.1rem */
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: rgba(250,247,242,0.4);
+            color: rgba(250, 247, 242, 0.4);   /* --white-soft at 40% */
             text-decoration: none;
-            transition: color 0.2s;
+            transition: color var(--transition);
         }
         .footer-links a:hover { color: var(--white-soft); }
         .footer-copy {
-            font-size: 0.8rem;
-            color: rgba(250,247,242,0.25);
+            font-size: var(--text-xs);   /* 1.0rem — fine print */
+            color: rgba(250, 247, 242, 0.25);   /* --white-soft at 25% */
         }
 
         /* ─── Responsive ────────────────────────────────────── */
         @media (max-width: 768px) {
-            nav { padding: 1rem 1.5rem; }
-            #hero { padding: 7rem 1.5rem 4rem; }
-            #fit-tool { padding: 4rem 1.5rem; }
-            #resume { padding: 4rem 1.5rem; }
-            footer { padding: 2.5rem 1.5rem; }
+            /* --pad-page handles fluid horizontal shrink automatically. */
+            /* Only override structural layout at mobile widths.         */
             .resume-summary { padding: 1.6rem 1.8rem; }
             .fit-input-footer { flex-direction: column; align-items: flex-end; }
             .nav-links { gap: 1.2rem; }
@@ -902,13 +867,13 @@
             Springfield, MO — and building something worth looking at.
         </p>
         <div class="hero-meta">
-            <div class="hero-meta-item"><span>30+</span> years design &amp; document management</div>
-            <div class="hero-meta-item"><span>1</span> shipped AI-directed full-stack app</div>
+            <div class="hero-meta-item"><span>30+</span> years design &amp; systems leadership</div>
+            <div class="hero-meta-item"><span>↗</span> Shipping finished projects built with AI Engineering</div>
             <div class="hero-meta-item"><span>∞</span> problems that needed a system</div>
         </div>
         <div class="hero-actions">
-            <a href="#fit-tool" class="btn-primary">Try the AI fit tool ↓</a>
-            <a href="#resume" class="btn-secondary">Jump to résumé</a>
+            <a href="#fit-tool" class="btn btn-primary">Try the AI fit tool ↓</a>
+            <a href="#resume" class="btn btn-secondary">Jump to résumé</a>
         </div>
     </div>
     <div class="hero-rule"></div>
@@ -995,15 +960,15 @@
         <!-- Summary -->
         <div class="resume-summary reveal">
             <p>
-                I bring an uncommon combination to the table: thirty years of professional design and document management experience, 
-                a project manager's instinct for systems and clarity, and a fast-developing practice in AI-directed software engineering. 
-                I don't write code by hand — I direct AI to produce complete, production-ready applications through precise prompting, 
-                iterative refinement, and a designer's eye for what good looks like.
+                Thirty years of making complex organizations work — designing systems, governing documents, and building workflows 
+                that outlast the people who commissioned them. I've led department-wide digital transformations, chaired a governance 
+                committee that grew to ISO 9001 scope, and maintained a 10,000-file library that a major health system depends on daily.
             </p>
             <p>
-                Currently building a portfolio of showcase web projects at tobyziegler.com — each one conceived, directed, 
-                troubleshot, and deployed without writing a single line of code by hand. It's a new kind of engineering practice, 
-                and I'm genuinely excited about where it's going.
+                Now I'm combining that foundation with a fast-developing AI engineering practice: directing AI models to produce 
+                complete, production-ready applications through structured prompting, iterative refinement, and a designer's instinct 
+                for what good looks like. Three shipped projects. A methodology that works. And thirty years of knowing how to 
+                see a problem clearly before touching a tool.
             </p>
         </div>
 
@@ -1030,19 +995,19 @@
                     <div class="competency-grid">
                         <div class="competency-item">
                             <div class="competency-title">AI Engineering &amp; Prompt Design</div>
-                            <div class="competency-desc">Directing AI models to produce complete, production-grade applications through structured prompting, iterative debugging, and quality review</div>
+                            <div class="competency-desc">Directing AI models to produce complete, production-grade applications — structured prompting, iterative debugging, quality review. Three shipped projects; methodology in active development.</div>
                         </div>
                         <div class="competency-item">
                             <div class="competency-title">Graphic Design &amp; Visual Communication</div>
-                            <div class="competency-desc">30+ years across print, digital, UI/UX, and document design; strong instinct for what works and why</div>
+                            <div class="competency-desc">30+ years across print, digital, UI/UX, and document design — with a consistent instinct for hierarchy, clarity, and work that earns trust from its audience.</div>
                         </div>
                         <div class="competency-item">
-                            <div class="competency-title">Project &amp; Document Management</div>
-                            <div class="competency-desc">End-to-end coordination of complex projects across large organizations; deep expertise in documentation systems, workflows, and records management</div>
+                            <div class="competency-title">Systems Thinking &amp; Workflow Automation</div>
+                            <div class="competency-desc">Built and led complete workflow transformations — film to digital, imagesetter to direct imaging, fully automated PDF pre-processing. ISO 9001 document governance at health-system scale.</div>
                         </div>
                         <div class="competency-item">
-                            <div class="competency-title">Technical Breadth</div>
-                            <div class="competency-desc">Working familiarity with PHP, JavaScript, SQL, HTML/CSS, Python, Java, C#; comfortable reading, debugging, and directing code across stacks</div>
+                            <div class="competency-title">Project &amp; Documentation Management</div>
+                            <div class="competency-desc">End-to-end ownership of complex projects across large organizations; 10,000+ active files under version control; committee chair; comfortable reading and directing code across PHP, JS, SQL, Python, and more.</div>
                         </div>
                     </div>
                 </section>
@@ -1058,35 +1023,23 @@
                         </div>
                         <div class="experience-company">CoxHealth — Springfield, Missouri</div>
                         <ul class="experience-bullets">
-                            <li>Chair, Document Control Oversight Committee — setting standards and policy for documentation practices across the health system</li>
-                            <li>Sole builder for the Addressograph / Patientworks system; responsible for all forms in a mission-critical patient records platform</li>
-                            <li>Coordinated design and documentation projects across 300+ departments, managing vendor and contractor relationships throughout</li>
-                            <li>Maintained and managed a library of 10,000+ active files with rigorous version control and lifecycle tracking</li>
-                            <li>Led the organization's transition from fully analog to all-digital design and document workflows</li>
-                            <li>10+ years developing internal software tools to support document management, design production, and departmental operations</li>
+                            <li>Sole responsible party for all forms in a mission-critical patient records platform (Addressograph/Patientworks) serving a regional health system — built and maintained end-to-end</li>
+                            <li>Maintained and governed a library of 10,000+ active files across 800+ departments, with rigorous version control and full lifecycle tracking</li>
+                            <li>Chair, Document Control Oversight Committee — set standards and policy for documentation practice across the entire health system; part of ISO 9001 compliance program, directly answerable to the top executive committee</li>
+                            <li>Led the organization's transition from fully analog to all-digital design and document workflows across multiple technology generations</li>
+                            <li>10+ years building internal software tools to support document management, design production, and departmental operations</li>
+                            <li>Coordinated design and documentation projects across 800+ departments, managing vendor and contractor relationships throughout</li>
                         </ul>
                     </article>
 
                     <article class="experience-entry">
                         <div class="experience-header">
-                            <div class="experience-title">Co-Owner</div>
-                        </div>
-                        <div class="experience-company">DirectBuy of Springfield</div>
-                        <ul class="experience-bullets">
-                            <li>Directed sales process for new memberships, from initial contact through close</li>
-                            <li>Coordinated telemarketing follow-up campaigns and supervised receiving operations</li>
-                        </ul>
-                    </article>
-
-                    <article class="experience-entry">
-                        <div class="experience-header">
-                            <div class="experience-title">Artist</div>
+                            <div class="experience-title">Graphic Artist</div>
                         </div>
                         <div class="experience-company">Sweetheart Cup Company</div>
                         <ul class="experience-bullets">
-                            <li>Managed the company-wide template library across Freehand, Illustrator, and Photoshop — the foundation every project was built on</li>
-                            <li>Produced thousands of individual product designs annually for cups, tubs, and containers</li>
-                            <li>Owned the full project lifecycle from customer brief through final production handoff</li>
+                            <li>Built and owned the company-wide template library across Freehand, Illustrator, and Photoshop — covering all 100+ product sizes, reducing multi-step setup to a single step. Nobody asked for this. It became the foundation every project was built on.</li>
+                            <li>Produced thousands of individual product designs annually for cups, tubs, and containers — owned the full project lifecycle from customer brief through final production handoff</li>
                         </ul>
                     </article>
 
@@ -1133,6 +1086,21 @@
                     <article class="portfolio-entry">
                         <div class="portfolio-header">
                             <div class="portfolio-title">
+                                <a href="https://resume.tobyziegler.com" target="_blank" rel="noopener" class="portfolio-link">AI Job Fit Tool ↗</a>
+                            </div>
+                            <div class="portfolio-year">2026</div>
+                        </div>
+                        <div class="portfolio-subtitle">resume.tobyziegler.com — this page</div>
+                        <ul class="portfolio-bullets">
+                            <li>AI-powered job fit assessment tool — visitors paste a job description and receive a structured, honest alignment analysis against a detailed professional profile</li>
+                            <li>Server-side PHP proxy calling the Anthropic API; structured JSON output rendered dynamically with fit-level badges, alignment breakdown, and a plain-language bottom line</li>
+                            <li>Built through AI-directed engineering; the system prompt, response schema, and UI were all designed and iterated through prompting — no hand-written code</li>
+                        </ul>
+                    </article>
+
+                    <article class="portfolio-entry">
+                        <div class="portfolio-header">
+                            <div class="portfolio-title">
                                 <a href="https://dadabase.tobyziegler.com" target="_blank" rel="noopener" class="portfolio-link">Dad-a-Base ↗</a>
                             </div>
                             <div class="portfolio-year">2025</div>
@@ -1140,9 +1108,24 @@
                         <div class="portfolio-subtitle">dadabase.tobyziegler.com</div>
                         <ul class="portfolio-bullets">
                             <li>Full-stack web application: joke database with search, voting, moderation queue, and admin panel</li>
-                            <li>Built entirely through AI-directed engineering — PHP 8.1, MySQL, vanilla JavaScript, deployed to Namecheap shared hosting via Git</li>
-                            <li>AI-powered categorization via Anthropic API; multi-category assignment, bulk import/export (CSV &amp; JSON), bcrypt admin authentication</li>
-                            <li>Designed with a warm editorial aesthetic; iteratively refined through prompting for accessibility, mobile responsiveness, and UX polish</li>
+                            <li>Built entirely through AI-directed engineering — PHP 8.1, MySQL, vanilla JavaScript, deployed to shared hosting via Git</li>
+                            <li>AI-powered multi-category classification via Anthropic API; bulk import/export (CSV &amp; JSON), bcrypt admin authentication, iteratively refined UX</li>
+                        </ul>
+                    </article>
+
+                    <article class="portfolio-entry">
+                        <div class="portfolio-header">
+                            <div class="portfolio-title">
+                                <a href="https://projects.tobyziegler.com/checks/" target="_blank" rel="noopener" class="portfolio-link">Children of the Checks ↗</a>
+                            </div>
+                            <div class="portfolio-year">2010–2020</div>
+                        </div>
+                        <div class="portfolio-subtitle">CoxHealth / Children's Miracle Network Telethon — Design &amp; Program</div>
+                        <ul class="portfolio-bullets">
+                            <li>Redesigned the CMN telethon check from scratch — replaced two yellow sheets taped together with a full-color photographic check featuring CMN children, their stories, and a realistic check layout sized for the on-air presentation format</li>
+                            <li>Cost per check: under $7 (vs. $50+ from outside vendor with labor donation discount) — approximately 85% cost reduction; negotiated access to engineering equipment in lieu of a dedicated budget</li>
+                            <li>Program ran for a decade; checks were saved and mounted by organizations as proud displays of their contributions. Other CMN chapters across the country attempted to replicate the model.</li>
+                            <li>An iterative design program where each year added new children, their stories, and evolving visual refinements — documented at projects.tobyziegler.com/checks/</li>
                         </ul>
                     </article>
 
@@ -1151,12 +1134,12 @@
                             <div class="portfolio-title">
                                 <a href="https://tobyziegler.com" target="_blank" rel="noopener" class="portfolio-link">Toby's Study ↗</a>
                             </div>
+                            <div class="portfolio-year">2025</div>
                         </div>
                         <div class="portfolio-subtitle">tobyziegler.com</div>
                         <ul class="portfolio-bullets">
-                            <li>Personal portfolio site featuring a study/library metaphor with subdomains as "rooms"</li>
-                            <li>Built in PHP/HTML/CSS/vanilla JavaScript with no frameworks — designed from scratch through AI-directed engineering</li>
-                            <li>Fluid typography, noise-texture layering, custom CSS bookcase component, and a consistent warm editorial design system</li>
+                            <li>Personal portfolio site featuring a study/library metaphor with subdomains as "rooms" — a shared CSS design system across all properties</li>
+                            <li>Built in PHP/HTML/CSS/vanilla JavaScript with no frameworks; fluid typography, noise-texture layering, custom CSS bookcase component, warm editorial aesthetic throughout</li>
                         </ul>
                     </article>
 

@@ -90,7 +90,7 @@ You have one job: tell the truth. A lukewarm fit called lukewarm is more useful 
 
 Toby Ziegler is a graphic designer and document manager with 30 years of professional experience, currently at CoxHealth in Springfield, Missouri. He is actively building a second professional identity as an AI engineer — directing AI models to produce complete, production-ready applications through structured prompting, iterative refinement, and a designer's eye for what good looks like.
 
-He does not write production code from scratch unaided. He directs AI to produce it. This is a real and demonstrable methodology, not a workaround — it's how the most progressive AI-forward companies are operating. His shipped portfolio project (Dad-a-Base) is a full-stack PHP/MySQL/JavaScript web application with AI-powered categorization, bulk import/export, admin authentication with bcrypt, and a moderation system — built entirely through AI-directed engineering.
+He does not write production code from scratch unaided. He directs AI to produce it. This is a real and demonstrable methodology, not a workaround — it's how the most progressive AI-forward companies are operating. He is shipping finished projects built entirely through AI-directed engineering. His portfolio includes a full-stack PHP/MySQL/JavaScript web application (Dad-a-Base) with AI-powered categorization, bulk import/export, admin authentication with bcrypt, and a moderation system; and this resume site's AI job fit tool — a live AI-powered application using a structured system prompt, JSON schema output, and a PHP/Anthropic API proxy. Beyond code, he ran a decade-long CMN telethon design program (Children of the Checks) that achieved ~85% cost reduction, generated national replication attempts, and produced work people framed and displayed.
 
 **Credentials:**
 - BS in Technology Management, minors in Computer Science and Web Application Development (Missouri State University)
@@ -102,7 +102,7 @@ He does not write production code from scratch unaided. He directs AI to produce
 **Current role:** Graphic Designer & Document Manager, CoxHealth (February 2001–present)
 - Chair, Document Control Oversight Committee — sets standards and policy for documentation across the health system
 - Sole builder and maintainer of all forms in a mission-critical patient records platform (Addressograph/Patientworks)
-- Coordinated design and documentation across 300+ departments
+- Coordinated design and documentation across 800+ departments
 - Maintained a library of 10,000+ active files with rigorous version control
 - Led the organization's transition from fully analog to all-digital design and document workflows
 - 10+ years developing internal software tools for document management and design production

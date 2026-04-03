@@ -29,7 +29,7 @@ It also features an **AI-powered job fit tool** — an interactive feature that 
 ## Relationship to the Main Site
 
 **Same author, same thread.** The resume subdomain shares:
-- Fraunces + DM Sans typography (non-negotiable)
+- Lora + DM Sans typography (non-negotiable; Fraunces was retired in shared.css v2.4)
 - The color palette and CSS variable system from tobyziegler.com
 - The voice and tone — warm, confident, honest, not corporate
 - The pill-button style and general component language
@@ -168,6 +168,12 @@ When starting a working session on this project, provide:
 - [x] The "known information" document — written, lives in `fit.php` system prompt ✓
 - [x] Honesty calibration — implemented per system-prompt-job-fit.md ✓
 - [x] JSON-LD structured data — implemented ✓
+- [x] Font migration — Fraunces → Lora, matching shared.css v2.4 ✓
+- [x] CSS token debt — full :root block canonical; --pad-page applied throughout ✓
+- [x] Professional summary — rewritten to lead with 30 years, AI engineering as evolution ✓
+- [x] Portfolio — AI Fit Tool added as entry #1; now shows 3 shipped projects ✓
+- [x] Hero meta — "3 shipped AI-directed applications" replaces misleading "1 shipped app" ✓
+- [x] DirectBuy — removed (undated, thin bullets, diluted anchor role) ✓
 - [ ] Source control — subdirectory of tobyzieglerdotcom repo, or separate repo?
 - [ ] Link placement on main site — not yet added
 - [ ] Download option — offer a PDF download alongside the web version?
@@ -185,4 +191,4 @@ When starting a working session on this project, provide:
 
 ---
 
-*Created: March 2026 — initial brief. Updated March 2026 — initial build complete, deploying and testing.*
+*Created: March 2026 — initial brief. Updated March 2026 — initial build complete, deploying and testing. Updated April 2026 — Fraunces→Lora migration, CSS token reconciliation, content strengthening pass.*

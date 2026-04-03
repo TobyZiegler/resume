@@ -12,7 +12,8 @@
 - Single-page architecture
 - AI fit tool prominent above the résumé content, dark section treatment
 - Paste-only for job descriptions (PDF upload deferred to later polish pass)
-- Shares tobyziegler.com visual identity: Fraunces + DM Sans, Classic Study palette, pill-button component language
+- Shares tobyziegler.com visual identity: **Lora + DM Sans** (Fraunces retired in shared.css v2.4 — this page now matches), Classic Study palette, pill-button component language
+- CSS token debt resolved: full :root block now matches shared.css v2.4; `--pad-page` used for all horizontal padding
 - CSS kept per-subdomain (not shared via assets subdomain) — revisit when portfolio has 4–5 rooms
 - `fit.php` as server-side proxy for Anthropic API (same pattern as `categorize.php` in Dad-a-Base)
 
@@ -27,6 +28,15 @@
 - [ ] Link from tobyziegler.com main site nav not yet added
 - [ ] PDF upload support deferred — add after core functionality confirmed working
 - [ ] Consider rate-limiting `fit.php` (currently open; low-traffic risk acceptable for now)
+- [x] Fraunces → Lora font migration complete
+- [x] CSS token debt resolved — :root block now canonical; --pad-page applied throughout
+- [x] Professional summary rewritten — leads with 30 years, frames AI engineering as evolution
+- [x] Hero meta updated — "3 shipped AI-directed applications" (fit tool + Dad-a-Base + Study)
+- [x] Competency cards strengthened — "Systems Thinking & Workflow Automation" replaces generic "Technical Breadth"
+- [x] CoxHealth bullets reordered — scale and mission-critical responsibility lead
+- [x] DirectBuy removed — undated, thin, diluted the page
+- [x] Portfolio expanded — AI Fit Tool added as entry #1 (it's a live AI app, it belongs here)
+- [x] Sweetheart Cup "Artist" → "Graphic Artist"; template library story surfaced more clearly
 
 **Next steps when resuming:**
 1. Deploy `index.php` and `fit.php` to `resume.tobyziegler.com` document root
@@ -226,7 +236,7 @@ The through line is not failure. His work consistently outlasted the organizatio
 ## Design Notes
 
 The resume site shares the tobyziegler.com visual identity:
-- **Typography:** Fraunces (display) + DM Sans (body) — non-negotiable
+- **Typography:** Lora (display) + DM Sans (body) — non-negotiable. Fraunces is retired; do not reintroduce it.
 - **Palette:** Classic Study — warm parchment (`#F5F0E8`), espresso (`#2C1F14`), forest green (`#3A5C3B`), burgundy (`#7B2D3A`)
 - **Components:** Pill-button style, generous whitespace, warm editorial minimalism
 - **Dark section:** `#1C1712` for the AI fit tool, consistent with main site dark treatments
