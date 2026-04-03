@@ -57,8 +57,6 @@
 
     <style>
         /* ─── CSS Variables ─────────────────────────────────── */
-        /* Tokens must match shared.css v2.4. Never redefine     */
-        /* a token that shared.css already provides.             */
         :root {
             --bg:           #F5F0E8;
             --bg-alt:       #EDE6D8;
@@ -83,12 +81,19 @@
             --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
             --pad-page:     max(2.5rem, 7vw);
 
-            /* Type scale — root font-size is fluid: clamp(16px, 1.25vw + 0.5rem, 26px) */
             --text-xs:      1.0rem;
             --text-sm:      1.1rem;
             --text-base:    1.3rem;
             --text-body:    1.6rem;
             --text-lg:      2.0rem;
+
+            /* ─── Fit-tool section warm brown palette ─────── */
+            --fit-bg:       #3D2B1F;   /* warm dark brown — much lighter than bg-dark */
+            --fit-bg-input: #4F3828;   /* slightly lighter for textarea/input area */
+            --fit-text:     #F0E8DC;   /* warm off-white */
+            --fit-muted:    rgba(240, 232, 220, 0.65);
+            --fit-rule:     rgba(240, 232, 220, 0.12);
+            --fit-green:    #8BAF6D;   /* --green lightened for warm-brown bg */
         }
 
 
@@ -105,14 +110,14 @@
             transition: background 0.4s, backdrop-filter 0.4s;
         }
         nav.scrolled {
-            background: rgba(245, 240, 232, 0.9);
+            background: rgba(245, 240, 232, 0.92);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--rule);
         }
         .nav-logo {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: var(--text-base);   /* 1.3rem */
+            font-size: var(--text-base);
             font-weight: 400;
             color: var(--text);
             text-decoration: none;
@@ -130,7 +135,7 @@
         }
         .nav-links a {
             font-family: var(--font-body);
-            font-size: var(--text-sm);   /* 1.1rem — nav label size */
+            font-size: var(--text-sm);
             font-weight: 500;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -140,15 +145,14 @@
         }
         .nav-links a:hover { color: var(--green); }
 
-        /* ─── Pill Buttons ──────────────────────────────────── */
-        /* .btn-primary and .btn-secondary are defined in shared.css. */
-        /* No local overrides needed — use the shared classes directly. */
+        /* shared.css provides .btn, .btn-primary, .btn-secondary, .eyebrow* */
 
-        /* ─── Eyebrow & Section Heading ─────────────────────── */
-        /* .eyebrow, .eyebrow-line, .eyebrow-text defined in shared.css. */
-        /* .section-heading is page-specific. */
+        /* ─── Eyebrow context margin ─────────────────────────── */
+        #hero .eyebrow { margin-bottom: 1.2rem; }
+
+        /* ─── Section inner ─────────────────────────────────── */
         .section-inner {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
         }
         .section-heading {
@@ -160,23 +164,8 @@
             color: var(--text);
             margin-bottom: 1rem;
         }
-        .section-heading em {
-            font-style: italic;
-            color: var(--green);
-        }
-        .section-heading {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.2rem);
-            font-weight: 300;
-            letter-spacing: -0.02em;
-            line-height: 1.15;
-            color: var(--text);
-            margin-bottom: 1rem;
-        }
-        .section-heading em {
-            font-style: italic;
-            color: var(--green);
-        }
+        .section-heading em { font-style: italic; color: var(--green); }
+
 
         /* ─── Hero ──────────────────────────────────────────── */
         #hero {
@@ -187,8 +176,6 @@
             padding: 8rem var(--pad-page) 5rem;
             overflow: hidden;
         }
-        /* Eyebrow inside hero needs bottom margin — shared.css doesn't set this */
-        #hero .eyebrow { margin-bottom: 1.2rem; }
         .hero-watermark {
             position: absolute;
             top: -0.1em;
@@ -206,7 +193,7 @@
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 960px;
             width: 100%;
             margin: 0 auto;
         }
@@ -225,7 +212,7 @@
         .hero-headline .burg { font-style: italic; color: var(--burg); }
         .hero-sub {
             max-width: 560px;
-            font-size: var(--text-body);   /* 1.6rem — fluid body size */
+            font-size: var(--text-body);
             line-height: 1.7;
             color: var(--text-muted);
             margin-bottom: 2.4rem;
@@ -241,7 +228,7 @@
             animation: fadeUp 0.7s ease 1.1s forwards;
         }
         .hero-meta-item {
-            font-size: var(--text-xs);   /* 1.0rem — meta label */
+            font-size: var(--text-sm);
             font-weight: 500;
             letter-spacing: 0.06em;
             text-transform: uppercase;
@@ -250,7 +237,7 @@
             align-items: center;
             gap: 0.4rem;
         }
-        .hero-meta-item span { color: var(--green); font-style: italic; font-family: var(--font-display); font-size: var(--text-sm); letter-spacing: 0; text-transform: none; font-weight: 400; }
+        .hero-meta-item span { color: var(--green); font-style: italic; font-family: var(--font-display); font-size: var(--text-base); letter-spacing: 0; text-transform: none; font-weight: 400; }
         .hero-actions {
             display: flex;
             align-items: center;
@@ -269,10 +256,11 @@
             animation: scaleIn 1s ease 0.6s forwards;
         }
 
+
         /* ─── AI Fit Tool ───────────────────────────────────── */
         #fit-tool {
-            background: var(--bg-dark);
-            color: var(--white-soft);
+            background: var(--fit-bg);
+            color: var(--fit-text);
             padding: 5rem var(--pad-page);
             position: relative;
             overflow: hidden;
@@ -281,13 +269,13 @@
             content: '';
             position: absolute;
             inset: 0;
-            opacity: 0.03;
+            opacity: 0.025;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
             background-size: 200px 200px;
             pointer-events: none;
         }
         .fit-tool-inner {
-            max-width: 900px;
+            max-width: 960px;
             margin: 0 auto;
         }
         .fit-eyebrow {
@@ -299,15 +287,15 @@
         .fit-eyebrow-line {
             width: 2rem;
             height: 1.5px;
-            background: var(--green);
+            background: var(--fit-green);
             flex-shrink: 0;
         }
         .fit-eyebrow-text {
-            font-size: 0.85rem;
+            font-size: var(--text-sm);
             font-weight: 600;
             letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: var(--green);
+            color: var(--fit-green);
         }
         .fit-heading {
             font-family: var(--font-display);
@@ -315,184 +303,260 @@
             font-weight: 300;
             letter-spacing: -0.02em;
             line-height: 1.2;
-            color: var(--white-soft);
+            color: var(--fit-text);
             margin-bottom: 0.8rem;
         }
-        .fit-heading em { font-style: italic; color: #8BAF6D; /* --green lightened for dark bg */ }
+        .fit-heading em { font-style: italic; color: var(--fit-green); }
         .fit-sub {
-            font-size: 1rem;
+            font-size: var(--text-base);
             line-height: 1.65;
-            color: rgba(250, 247, 242, 0.65);
-            max-width: 560px;
+            color: var(--fit-muted);
+            max-width: 600px;
             margin-bottom: 2.4rem;
         }
+
+        /* Input area */
         .fit-input-area {
-            background: rgba(250, 247, 242, 0.05);
-            border: 1px solid rgba(250, 247, 242, 0.15);
-            border-radius: 0.75rem;
+            background: var(--fit-bg-input);
+            border: 1px solid rgba(240, 232, 220, 0.2);
+            border-radius: var(--radius);
             overflow: hidden;
-            transition: border-color 0.2s;
+            transition: border-color var(--transition);
         }
         .fit-input-area:focus-within {
-            border-color: rgba(139, 175, 109, 0.6);
+            border-color: rgba(139, 175, 109, 0.7);
         }
         #job-description {
             display: block;
             width: 100%;
-            min-height: 200px;
+            min-height: 220px;
             background: transparent;
             border: none;
             outline: none;
-            padding: 1.4rem 1.6rem;
+            padding: 1.6rem 1.8rem;
             font-family: var(--font-body);
-            font-size: 0.95rem;
+            font-size: var(--text-base);
             line-height: 1.65;
-            color: var(--white-soft);
+            color: var(--fit-text);
             resize: vertical;
         }
-        #job-description::placeholder { color: rgba(250, 247, 242, 0.35); }
+        #job-description::placeholder { color: rgba(240, 232, 220, 0.35); }
         .fit-input-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.8rem 1.6rem;
-            border-top: 1px solid rgba(250, 247, 242, 0.08);
+            padding: 0.8rem 1.8rem;
+            border-top: 1px solid var(--fit-rule);
             gap: 1rem;
         }
         .fit-char-count {
-            font-size: 0.82rem;
-            color: rgba(250, 247, 242, 0.35);
+            font-size: var(--text-sm);
+            color: rgba(240, 232, 220, 0.4);
         }
         .btn-assess {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            padding: 0.52rem 1.6rem;
-            background: var(--green);
-            color: var(--white-soft);
+            padding: 0.6rem 1.8rem;
+            background: var(--fit-green);
+            color: #1C2E14;
             font-family: var(--font-body);
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: var(--text-sm);
+            font-weight: 700;
             letter-spacing: 0.04em;
-            border: 2px solid var(--green);
+            border: 2px solid var(--fit-green);
             border-radius: var(--radius-pill);
             cursor: pointer;
-            transition: background 0.2s, color 0.2s, transform 0.18s;
+            transition: background var(--transition), color var(--transition), transform 0.18s;
         }
         .btn-assess:hover:not(:disabled) {
             background: transparent;
-            color: var(--green);
+            color: var(--fit-green);
             transform: translateY(-2px);
         }
         .btn-assess:disabled {
-            opacity: 0.45;
+            opacity: 0.4;
             cursor: not-allowed;
         }
 
-        /* ─── Fit Result ────────────────────────────────────── */
+        /* ─── Fit Result — card layout ──────────────────────── */
         #fit-result {
             display: none;
-            margin-top: 2rem;
-            background: rgba(250, 247, 242, 0.05);
-            border: 1px solid rgba(250, 247, 242, 0.12);
-            border-radius: 0.75rem;
-            overflow: hidden;
+            margin-top: 2.5rem;
             animation: fadeUp 0.6s ease forwards;
         }
         #fit-result.visible { display: block; }
 
-        .fit-result-header {
-            padding: 1.6rem 1.8rem 1.2rem;
-            border-bottom: 1px solid rgba(250, 247, 242, 0.08);
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 1rem;
+        /* Top row: large signal card + summary side by side */
+        .fit-result-top {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+            align-items: stretch;
         }
-        .fit-signal {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.3rem 1rem;
-            border-radius: var(--radius-pill);
-            font-size: 0.82rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+        @media (max-width: 640px) {
+            .fit-result-top { grid-template-columns: 1fr; }
         }
-        /* Fit signal badge colors — on-dark variants; no shared token exists for these */
-        .fit-signal.strong   { background: rgba(58, 92, 59, 0.3); color: #8BAF6D; border: 1px solid rgba(58, 92, 59, 0.5); }   /* --green derived */
-        .fit-signal.moderate { background: rgba(180, 140, 60, 0.2); color: #C8A84B; border: 1px solid rgba(180, 140, 60, 0.4); } /* warm gold — page-specific */
-        .fit-signal.partial  { background: rgba(123, 45, 58, 0.2); color: #C97A82; border: 1px solid rgba(123, 45, 58, 0.35); }  /* --burg derived */
-        .fit-signal.limited  { background: rgba(100, 100, 100, 0.2); color: #aaa; border: 1px solid rgba(100, 100, 100, 0.3); }  /* neutral gray — page-specific */
 
-        .fit-result-body {
-            padding: 1.6rem 1.8rem;
-        }
-        .fit-section {
-            margin-bottom: 1.8rem;
-        }
-        .fit-section:last-child { margin-bottom: 0; }
-        .fit-section-label {
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--green);
-            margin-bottom: 0.6rem;
+        /* Signal card — big verdict */
+        .fit-card-signal {
+            background: rgba(240, 232, 220, 0.07);
+            border: 1px solid var(--fit-rule);
+            border-radius: var(--radius);
+            padding: 2rem 2.4rem;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
+            text-align: center;
+            min-width: 200px;
         }
-        .fit-section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: rgba(250,247,242,0.08);
-        }
-        .fit-section-content {
-            font-size: 0.96rem;
-            line-height: 1.7;
-            color: rgba(250, 247, 242, 0.82);
-        }
-        .fit-section-content p { margin-bottom: 0.6rem; }
-        .fit-section-content p:last-child { margin-bottom: 0; }
-        .fit-section-content ul {
-            padding-left: 1.3rem;
+        .fit-signal-level {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
             margin-bottom: 0.6rem;
         }
-        .fit-section-content li { margin-bottom: 0.3rem; }
-        .fit-bottom-line {
+        .fit-signal-level.strong   { color: #8FC96E; }
+        .fit-signal-level.moderate { color: #D4A847; }
+        .fit-signal-level.partial  { color: #D4827A; }
+        .fit-signal-level.limited  { color: rgba(240, 232, 220, 0.5); }
+
+        .fit-signal-pip {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+        }
+        .strong  .fit-signal-pip { background: #8FC96E; box-shadow: 0 0 8px rgba(143,201,110,0.6); }
+        .moderate .fit-signal-pip { background: #D4A847; box-shadow: 0 0 8px rgba(212,168,71,0.5); }
+        .partial .fit-signal-pip { background: #D4827A; box-shadow: 0 0 8px rgba(212,130,122,0.5); }
+        .limited .fit-signal-pip { background: rgba(240, 232, 220, 0.4); }
+
+        .fit-signal-label {
+            font-size: var(--text-xs);
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: rgba(240, 232, 220, 0.45);
+            margin-bottom: 0.3rem;
+        }
+
+        /* Summary card — sits beside signal */
+        .fit-card-summary {
+            background: rgba(240, 232, 220, 0.07);
+            border: 1px solid var(--fit-rule);
+            border-radius: var(--radius);
+            padding: 1.8rem 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .fit-card-summary p {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: 1.05rem;
-            line-height: 1.65;
-            color: var(--white-soft);
+            font-size: var(--text-body);
+            line-height: 1.6;
+            color: var(--fit-text);
         }
+
+        /* Bottom row: three cards side by side */
+        .fit-result-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+        }
+        @media (max-width: 820px) {
+            .fit-result-cards { grid-template-columns: 1fr; }
+        }
+
+        .fit-card {
+            background: rgba(240, 232, 220, 0.05);
+            border: 1px solid var(--fit-rule);
+            border-radius: var(--radius);
+            padding: 1.6rem 1.8rem;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Subtle top accent line per card type */
+        .fit-card-alignment { border-top: 2px solid rgba(143, 201, 110, 0.5); }
+        .fit-card-gaps      { border-top: 2px solid rgba(212, 130, 122, 0.5); }
+        .fit-card-bottom    { border-top: 2px solid rgba(212, 168, 71, 0.5); background: rgba(240, 232, 220, 0.08); }
+
+        .fit-card-label {
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        .fit-card-alignment .fit-card-label { color: #8FC96E; }
+        .fit-card-gaps      .fit-card-label { color: #D4827A; }
+        .fit-card-bottom    .fit-card-label { color: #D4A847; }
+
+        .fit-card-content {
+            font-size: var(--text-sm);
+            line-height: 1.7;
+            color: rgba(240, 232, 220, 0.85);
+        }
+        .fit-card-content p { margin-bottom: 0.6rem; }
+        .fit-card-content p:last-child { margin-bottom: 0; }
+        .fit-card-content ul { padding-left: 1.2rem; margin-bottom: 0.6rem; }
+        .fit-card-content li { margin-bottom: 0.35rem; }
+
+        /* Bottom line card gets display/italic treatment */
+        .fit-card-bottom .fit-card-content {
+            font-family: var(--font-display);
+            font-style: italic;
+            font-size: var(--text-base);
+            color: var(--fit-text);
+            line-height: 1.65;
+        }
+
+        /* Result header — clear button */
+        .fit-result-clear {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+        .fit-result-clear button {
+            background: none;
+            border: none;
+            color: rgba(240, 232, 220, 0.35);
+            cursor: pointer;
+            font-size: var(--text-sm);
+            padding: 0.3rem 0;
+            transition: color var(--transition);
+        }
+        .fit-result-clear button:hover { color: rgba(240, 232, 220, 0.7); }
 
         /* Loading state */
         #fit-loading {
             display: none;
-            padding: 2.5rem;
+            padding: 3rem;
             text-align: center;
         }
         #fit-loading.visible { display: block; }
         .loading-dots {
             display: inline-flex;
-            gap: 0.4rem;
+            gap: 0.5rem;
             margin-bottom: 1rem;
         }
         .loading-dots span {
-            width: 8px; height: 8px;
-            background: var(--green);
+            width: 9px; height: 9px;
+            background: var(--fit-green);
             border-radius: 50%;
             animation: pulse 1.4s ease-in-out infinite;
         }
         .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
         .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
         .loading-text {
-            font-size: 0.9rem;
-            color: rgba(250,247,242,0.5);
+            font-size: var(--text-base);
+            color: var(--fit-muted);
             font-style: italic;
         }
 
@@ -500,17 +564,18 @@
         #fit-error {
             display: none;
             padding: 1.6rem 1.8rem;
-            color: #C97A82;
-            font-size: 0.92rem;
+            color: #D4827A;
+            font-size: var(--text-base);
             line-height: 1.6;
         }
         #fit-error.visible { display: block; }
         #fit-error-detail {
             margin-top: 0.4rem;
-            font-size: 0.82rem;
-            color: rgba(201, 122, 130, 0.7);
+            font-size: var(--text-sm);
+            color: rgba(212, 130, 122, 0.7);
             font-family: monospace;
         }
+
 
         /* ─── Resume Content ────────────────────────────────── */
         #resume {
@@ -520,49 +585,62 @@
         /* Summary strip */
         .resume-summary {
             background: var(--bg-alt);
-            border-radius: 0.75rem;
+            border-radius: var(--radius);
             padding: 2.4rem 2.8rem;
             margin-bottom: 4rem;
             border: 1px solid var(--rule);
+            box-shadow: var(--shadow-card);
         }
         .resume-summary p {
-            font-size: 1.06rem;
+            font-size: var(--text-base);
             line-height: 1.75;
             color: var(--text);
-            max-width: 720px;
+            max-width: 760px;
         }
         .resume-summary p + p { margin-top: 0.8rem; }
 
-        /* Resume grid layout: sidebar + main */
-        .resume-layout {
-            display: grid;
-            grid-template-columns: 220px 1fr;
-            gap: 4rem;
-            align-items: start;
+        /* ── Layout: sidebar floats left, main content flush left ── */
+        /*
+         * The sidebar sits to the left of the summary box edge.
+         * Main content (sections) aligns with the summary's left edge.
+         * Achieved by making the outer wrapper full-width, with the
+         * sidebar absolutely positioned relative to the section-inner,
+         * and the main content taking full width of section-inner.
+         */
+        .resume-layout-outer {
+            position: relative;
         }
-        @media (max-width: 700px) {
-            .resume-layout {
-                grid-template-columns: 1fr;
-                gap: 3rem;
-            }
-        }
-
-        /* Sidebar nav */
         .resume-sidebar {
+            position: absolute;
+            top: 0;
+            left: calc(-1 * (var(--sidebar-w) + var(--sidebar-gap)));
+            width: var(--sidebar-w);
+        }
+        .resume-sidebar-sticky {
             position: sticky;
             top: 5.5rem;
         }
+        :root {
+            --sidebar-w:   180px;
+            --sidebar-gap: 2.5rem;
+        }
+
+        /* Hide sidebar at narrow viewports — section headings suffice */
+        @media (max-width: 1080px) {
+            .resume-sidebar { display: none; }
+        }
+
         .resume-sidebar-nav {
             list-style: none;
         }
         .resume-sidebar-nav li {
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.4rem;
         }
         .resume-sidebar-nav a {
             display: block;
-            font-size: var(--text-xs);   /* 1.0rem — compact sidebar label */
+            font-size: var(--text-sm);
             font-weight: 500;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
             color: var(--text-muted);
             text-decoration: none;
@@ -577,7 +655,7 @@
             border-left-color: var(--green);
         }
 
-        /* Resume sections */
+        /* Resume sections — full width of section-inner */
         .resume-section {
             margin-bottom: 3.5rem;
             scroll-margin-top: 5.5rem;
@@ -586,11 +664,11 @@
 
         .resume-section-heading {
             font-family: var(--font-display);
-            font-size: var(--text-lg);   /* 2.0rem */
-            font-weight: 400;
+            font-size: var(--text-lg);
+            font-weight: 300;
             font-style: italic;
             color: var(--text);
-            margin-bottom: 1.6rem;
+            margin-bottom: 1.8rem;
             padding-bottom: 0.8rem;
             border-bottom: 1px solid var(--rule);
         }
@@ -601,31 +679,32 @@
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
-        @media (max-width: 500px) { .competency-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .competency-grid { grid-template-columns: 1fr; } }
         .competency-item {
             background: var(--bg-alt);
             border: 1px solid var(--rule);
             border-radius: var(--radius-sm);
-            padding: 1rem 1.2rem;
+            padding: 1.2rem 1.4rem;
+            box-shadow: var(--shadow-card);
         }
         .competency-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: var(--text-sm);   /* 1.1rem */
+            font-size: var(--text-base);
             font-weight: 500;
             color: var(--green);
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.4rem;
         }
         .competency-desc {
-            font-size: var(--text-xs);   /* 1.0rem — card body; intentionally compact */
-            line-height: 1.55;
+            font-size: var(--text-sm);
+            line-height: 1.6;
             color: var(--text-muted);
         }
 
         /* Experience entries */
         .experience-entry {
-            margin-bottom: 2.2rem;
-            padding-bottom: 2.2rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
             border-bottom: 1px solid var(--rule);
         }
         .experience-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
@@ -640,33 +719,33 @@
         .experience-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: var(--text-sm);   /* 1.1rem */
+            font-size: var(--text-body);
             font-weight: 500;
             color: var(--text);
         }
         .experience-date {
-            font-size: var(--text-xs);   /* 1.0rem — metadata label */
+            font-size: var(--text-sm);
             font-weight: 500;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.05em;
             color: var(--text-muted);
             white-space: nowrap;
         }
         .experience-company {
-            font-size: var(--text-xs);   /* 1.0rem — company label */
-            font-weight: 600;
-            letter-spacing: 0.05em;
+            font-size: var(--text-sm);
+            font-weight: 700;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
             color: var(--green);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.9rem;
         }
         .experience-bullets {
-            padding-left: 1.1rem;
+            padding-left: 1.2rem;
         }
         .experience-bullets li {
-            font-size: var(--text-xs);   /* 1.0rem — resume body copy; fluid root keeps this readable */
-            line-height: 1.6;
+            font-size: var(--text-base);
+            line-height: 1.65;
             color: var(--text);
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.45rem;
         }
         .experience-bullets li:last-child { margin-bottom: 0; }
 
@@ -675,8 +754,9 @@
             background: var(--bg-alt);
             border: 1px solid var(--rule);
             border-radius: var(--radius-sm);
-            padding: 1.4rem 1.6rem;
+            padding: 1.6rem 1.8rem;
             margin-bottom: 1.2rem;
+            box-shadow: var(--shadow-card);
         }
         .portfolio-entry:last-child { margin-bottom: 0; }
         .portfolio-header {
@@ -685,12 +765,12 @@
             align-items: baseline;
             flex-wrap: wrap;
             gap: 0.4rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         .portfolio-title {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: var(--text-sm);   /* 1.1rem */
+            font-size: var(--text-body);
             font-weight: 500;
             color: var(--text);
         }
@@ -701,123 +781,81 @@
         }
         .portfolio-link:hover { color: var(--green); }
         .portfolio-year {
-            font-size: var(--text-xs);   /* 1.0rem — year label */
+            font-size: var(--text-sm);
             letter-spacing: 0.06em;
             color: var(--text-muted);
         }
         .portfolio-subtitle {
-            font-size: var(--text-xs);   /* 1.0rem — subtitle/URL line */
-            font-weight: 500;
+            font-size: var(--text-sm);
+            font-weight: 600;
             letter-spacing: 0.04em;
             color: var(--burg);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.9rem;
         }
         .portfolio-bullets {
-            padding-left: 1.1rem;
+            padding-left: 1.2rem;
         }
         .portfolio-bullets li {
-            font-size: var(--text-xs);   /* 1.0rem — portfolio body copy */
-            line-height: 1.6;
+            font-size: var(--text-base);
+            line-height: 1.65;
             color: var(--text-muted);
-            margin-bottom: 0.3rem;
+            margin-bottom: 0.35rem;
         }
 
         /* Education */
         .education-school {
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
+            margin-bottom: 2.2rem;
+            padding-bottom: 2.2rem;
             border-bottom: 1px solid var(--rule);
         }
         .education-school:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
         .education-school-name {
             font-family: var(--font-display);
             font-style: italic;
-            font-size: var(--text-sm);   /* 1.1rem */
+            font-size: var(--text-body);
             font-weight: 500;
             color: var(--text);
-            margin-bottom: 0.15rem;
+            margin-bottom: 0.2rem;
         }
         .education-location {
-            font-size: var(--text-xs);   /* 1.0rem — location metadata */
+            font-size: var(--text-sm);
             color: var(--text-muted);
-            margin-bottom: 0.7rem;
+            margin-bottom: 0.8rem;
         }
         .education-degree {
-            font-size: var(--text-xs);   /* 1.0rem */
-            line-height: 1.5;
+            font-size: var(--text-base);
+            line-height: 1.55;
             color: var(--text);
-            margin-bottom: 0.25rem;
-            padding-left: 0.5rem;
+            margin-bottom: 0.3rem;
+            padding-left: 0.6rem;
             border-left: 2px solid var(--rule);
         }
         .education-degree strong {
-            font-weight: 600;
+            font-weight: 700;
             color: var(--green);
-            font-size: 0.8rem;   /* page-specific — degree abbreviation badge, smaller than --text-xs intentionally */
-            letter-spacing: 0.05em;
+            font-size: 0.8rem;   /* page-specific — abbreviation badge, smaller than --text-xs intentionally */
+            letter-spacing: 0.06em;
             text-transform: uppercase;
         }
-        .education-degree em { font-style: italic; color: var(--text-muted); font-size: var(--text-xs); }
+        .education-degree em { font-style: italic; color: var(--text-muted); font-size: var(--text-sm); }
         .education-minor {
-            font-size: var(--text-xs);   /* 1.0rem */
+            font-size: var(--text-sm);
             color: var(--text-muted);
             padding-left: 1rem;
-            margin-top: 0.15rem;
+            margin-top: 0.2rem;
         }
         .education-capstone {
-            margin-top: 0.8rem;
-            font-size: var(--text-xs);   /* 1.0rem */
+            margin-top: 1rem;
+            font-size: var(--text-base);
             color: var(--text-muted);
             font-style: italic;
-            padding-left: 0.5rem;
+            padding-left: 0.6rem;
             border-left: 2px solid rgba(58, 92, 59, 0.3);   /* --green at 30% */
         }
 
-        /* ─── Footer ────────────────────────────────────────── */
-        footer {
-            background: var(--bg-dark);
-            color: rgba(250, 247, 242, 0.5);   /* --white-soft at 50% */
-            padding: 3rem var(--pad-page);
-            text-align: center;
-        }
-        .footer-inner {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .footer-name {
-            font-family: var(--font-display);
-            font-style: italic;
-            font-size: var(--text-lg);   /* 2.0rem */
-            font-weight: 300;
-            color: var(--white-soft);
-            margin-bottom: 0.6rem;
-        }
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-        .footer-links a {
-            font-size: var(--text-sm);   /* 1.1rem */
-            font-weight: 500;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(250, 247, 242, 0.4);   /* --white-soft at 40% */
-            text-decoration: none;
-            transition: color var(--transition);
-        }
-        .footer-links a:hover { color: var(--white-soft); }
-        .footer-copy {
-            font-size: var(--text-xs);   /* 1.0rem — fine print */
-            color: rgba(250, 247, 242, 0.25);   /* --white-soft at 25% */
-        }
 
         /* ─── Responsive ────────────────────────────────────── */
         @media (max-width: 768px) {
-            /* --pad-page handles fluid horizontal shrink automatically. */
-            /* Only override structural layout at mobile widths.         */
             .resume-summary { padding: 1.6rem 1.8rem; }
             .fit-input-footer { flex-direction: column; align-items: flex-end; }
             .nav-links { gap: 1.2rem; }
@@ -926,26 +964,33 @@
 
         <!-- Result -->
         <div id="fit-result" role="region" aria-label="Fit assessment result">
-            <div class="fit-result-header">
-                <div>
-                    <div id="fit-signal-badge" class="fit-signal"></div>
-                </div>
-                <button onclick="clearResult()" style="background:none;border:none;color:rgba(250,247,242,0.35);cursor:pointer;font-size:0.85rem;padding:0.3rem;">
-                    ✕ Clear
-                </button>
+            <div class="fit-result-clear">
+                <button onclick="clearResult()">✕ Clear</button>
             </div>
-            <div class="fit-result-body">
-                <div class="fit-section" id="result-alignment">
-                    <div class="fit-section-label">Where the background aligns</div>
-                    <div class="fit-section-content" id="result-alignment-text"></div>
+            <!-- Top row: signal + summary -->
+            <div class="fit-result-top">
+                <div class="fit-card-signal" id="fit-signal-card">
+                    <div class="fit-signal-label">Fit Assessment</div>
+                    <div id="fit-signal-badge" class="fit-signal-level"></div>
+                    <div id="fit-signal-pip-el" class="fit-signal-pip"></div>
                 </div>
-                <div class="fit-section" id="result-gaps">
-                    <div class="fit-section-label">Honest gaps or differences</div>
-                    <div class="fit-section-content" id="result-gaps-text"></div>
+                <div class="fit-card-summary">
+                    <p id="fit-signal-summary-text"></p>
                 </div>
-                <div class="fit-section" id="result-bottom">
-                    <div class="fit-section-label">Bottom line</div>
-                    <div class="fit-bottom-line" id="result-bottom-text"></div>
+            </div>
+            <!-- Bottom row: three cards -->
+            <div class="fit-result-cards">
+                <div class="fit-card fit-card-alignment">
+                    <div class="fit-card-label">Where it aligns</div>
+                    <div class="fit-card-content" id="result-alignment-text"></div>
+                </div>
+                <div class="fit-card fit-card-gaps">
+                    <div class="fit-card-label">Honest gaps</div>
+                    <div class="fit-card-content" id="result-gaps-text"></div>
+                </div>
+                <div class="fit-card fit-card-bottom">
+                    <div class="fit-card-label">Bottom line</div>
+                    <div class="fit-card-content" id="result-bottom-text"></div>
                 </div>
             </div>
         </div>
@@ -972,21 +1017,23 @@
             </p>
         </div>
 
-        <div class="resume-layout">
+        <div class="resume-layout-outer">
 
-            <!-- Sidebar -->
+            <!-- Sidebar — absolutely positioned to the left of content -->
             <aside class="resume-sidebar" aria-label="Section navigation">
-                <nav>
-                    <ul class="resume-sidebar-nav" id="sidebar-nav">
-                        <li><a href="#sec-competencies">Competencies</a></li>
-                        <li><a href="#sec-experience">Experience</a></li>
-                        <li><a href="#sec-portfolio">Portfolio</a></li>
-                        <li><a href="#sec-education">Education</a></li>
-                    </ul>
-                </nav>
+                <div class="resume-sidebar-sticky">
+                    <nav>
+                        <ul class="resume-sidebar-nav" id="sidebar-nav">
+                            <li><a href="#sec-competencies">Competencies</a></li>
+                            <li><a href="#sec-experience">Experience</a></li>
+                            <li><a href="#sec-portfolio">Portfolio</a></li>
+                            <li><a href="#sec-education">Education</a></li>
+                        </ul>
+                    </nav>
+                </div>
             </aside>
 
-            <!-- Main Resume Content -->
+            <!-- Main Resume Content — full width of section-inner -->
             <main>
 
                 <!-- Core Competencies -->
@@ -1181,23 +1228,23 @@
                 </section>
 
             </main>
-        </div><!-- /.resume-layout -->
+        </div><!-- /.resume-layout-outer -->
     </div><!-- /.section-inner -->
 </section>
 
 <!-- ─── Footer ───────────────────────────────────────────── -->
-<footer>
-    <div class="footer-inner">
-        <div class="footer-name">Toby Ziegler</div>
-        <nav class="footer-links" aria-label="Footer navigation">
-            <a href="https://tobyziegler.com" target="_blank" rel="noopener">tobyziegler.com ↗</a>
-            <a href="https://dadabase.tobyziegler.com" target="_blank" rel="noopener">Dad-a-Base ↗</a>
-            <a href="https://linkedin.com/in/tobyziegler" target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a href="#fit-tool">AI Fit Tool</a>
-            <a href="#resume">Résumé</a>
-        </nav>
-        <p class="footer-copy">Springfield, Missouri · resume.tobyziegler.com</p>
+<footer class="site-footer">
+    <div>
+        <span class="room-name">Toby Ziegler</span>
+        <span class="tagline">resume.tobyziegler.com</span>
     </div>
+    <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="https://tobyziegler.com" target="_blank" rel="noopener" class="footer-link">tobyziegler.com ↗</a>
+        <a href="https://dadabase.tobyziegler.com" target="_blank" rel="noopener" class="footer-link">Dad-a-Base ↗</a>
+        <a href="https://linkedin.com/in/tobyziegler" target="_blank" rel="noopener" class="footer-link">LinkedIn ↗</a>
+        <a href="#fit-tool" class="footer-link">AI Fit Tool</a>
+        <a href="#resume" class="footer-link">Résumé</a>
+    </nav>
 </footer>
 
 <script>
@@ -1286,31 +1333,31 @@ async function runAssessment() {
 function renderResult(r) {
     document.getElementById('fit-loading').classList.remove('visible');
 
-    // Signal badge
-    const badge = document.getElementById('fit-signal-badge');
-    badge.className = 'fit-signal ' + (r.fitClass || 'moderate');
+    // Signal card
+    var fitClass = r.fitClass || 'moderate';
+    var badge = document.getElementById('fit-signal-badge');
+    badge.className = 'fit-signal-level ' + fitClass;
     badge.textContent = r.fitLevel;
 
-    // Sections
+    // Pip color class on the card container
+    var signalCard = document.getElementById('fit-signal-card');
+    signalCard.className = 'fit-card-signal ' + fitClass;
+
+    // Pip element
+    var pip = document.getElementById('fit-signal-pip-el');
+    pip.className = 'fit-signal-pip';
+
+    // Summary text
+    document.getElementById('fit-signal-summary-text').textContent = r.fitSummary;
+
+    // Section cards
     setText('result-alignment-text', r.alignment);
     setText('result-gaps-text', r.gaps);
 
-    const bl = document.getElementById('result-bottom-text');
+    var bl = document.getElementById('result-bottom-text');
     bl.textContent = r.bottomLine;
 
-    // Append summary under badge
-    let summaryEl = document.getElementById('fit-signal-summary');
-    if (!summaryEl) {
-        summaryEl = document.createElement('p');
-        summaryEl.id = 'fit-signal-summary';
-        summaryEl.style.cssText = 'font-size:0.92rem;line-height:1.6;color:rgba(250,247,242,0.7);margin-top:0.5rem;';
-        badge.parentNode.appendChild(summaryEl);
-    }
-    summaryEl.textContent = r.fitSummary;
-
     document.getElementById('fit-result').classList.add('visible');
-
-    // Scroll into view
     document.getElementById('fit-result').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -1334,7 +1381,6 @@ function escapeHTML(str) {
 
 function clearResult() {
     document.getElementById('fit-result').classList.remove('visible');
-    document.getElementById('fit-signal-summary') && document.getElementById('fit-signal-summary').remove();
     textarea.value = '';
     charCount.textContent = '0 characters';
     btnAssess.disabled = true;
