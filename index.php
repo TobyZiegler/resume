@@ -18,7 +18,7 @@
 
     <!-- Canonical -->
     <link rel="canonical" href="https://resume.tobyziegler.com" />
-    <link rel="stylesheet" href="shared.css">
+    <link rel="stylesheet" href="https://tobyziegler.com/assets/shared.css">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -50,55 +50,31 @@
     }
     </script>
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,300..700;1,300..700&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..500&display=swap" rel="stylesheet" />
+    <!-- Fonts loaded via @import in shared.css — no duplicate <link> tags needed here -->
 
     <style>
-        /* ─── CSS Variables ─────────────────────────────────── */
+        /* ─── Page-specific tokens ─────────────────────────────
+         * All base tokens (colors, type scale, radius, shadow,
+         * fonts, --pad-page, --transition) are in shared.css.
+         * Only tokens not present in shared.css live here.
+         * ────────────────────────────────────────────────────── */
         :root {
-            --bg:           #F5F0E8;
-            --bg-alt:       #EDE6D8;
-            --bg-dark:      #1C1712;
-            --white-soft:   #FAF7F2;
-            --text:         #2C1F14;
-            --text-muted:   #6B5744;
-            --green:        #3A5C3B;
-            --burg:         #7B2D3A;
-            --rule:         rgba(44, 31, 20, 0.15);
-            --rule-strong:  rgba(44, 31, 20, 0.28);
-
-            --font-display: 'Lora', Georgia, serif;
-            --font-body:    'DM Sans', sans-serif;
-
-            --radius-sm:    0.4rem;
-            --radius:       1.0rem;
-            --radius-lg:    1.75rem;
-            --radius-pill:  1.25rem;
-            --shadow-card:  0 2px 16px rgba(44, 31, 20, 0.08), 0 1px 3px rgba(44, 31, 20, 0.06);
-            --shadow-lift:  0 8px 32px rgba(44, 31, 20, 0.13), 0 2px 8px rgba(44, 31, 20, 0.08);
-            --transition:   0.25s cubic-bezier(0.4, 0, 0.2, 1);
-            --pad-page:     max(2.5rem, 7vw);
-
-            --text-xs:      1.0rem;
-            --text-sm:      1.1rem;
-            --text-base:    1.3rem;
-            --text-body:    1.6rem;
-            --text-lg:      2.0rem;
-
-            /* ─── Fit-tool section warm brown palette ─────── */
-            --fit-bg:       #3D2B1F;   /* warm dark brown — much lighter than bg-dark */
-            --fit-bg-input: #4F3828;   /* slightly lighter for textarea/input area */
+            /* Fit-tool section — warm brown palette, page-specific */
+            --fit-bg:       #3D2B1F;   /* warm dark brown */
+            --fit-bg-input: #4F3828;   /* slightly lighter for textarea */
             --fit-text:     #F0E8DC;   /* warm off-white */
             --fit-muted:    rgba(240, 232, 220, 0.65);
             --fit-rule:     rgba(240, 232, 220, 0.12);
-            --fit-green:    #8BAF6D;   /* --green lightened for warm-brown bg */
+            --fit-green:    #8BAF6D;   /* --green lightened for dark bg */
+
+            /* Résumé sidebar layout */
+            --sidebar-w:    180px;
+            --sidebar-gap:  2.5rem;
         }
 
 
         /* ─── Nav ───────────────────────────────────────────── */
-        nav {
+        #main-nav {
             position: fixed;
             top: 0; left: 0; right: 0;
             z-index: 100;
@@ -109,7 +85,7 @@
             background: transparent;
             transition: background 0.4s, backdrop-filter 0.4s;
         }
-        nav.scrolled {
+        #main-nav.scrolled {
             background: rgba(245, 240, 232, 0.92);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--rule);
@@ -145,9 +121,8 @@
         }
         .nav-links a:hover { color: var(--green); }
 
-        /* shared.css provides .btn, .btn-primary, .btn-secondary, .eyebrow* */
-
         /* ─── Eyebrow context margin ─────────────────────────── */
+        /* .eyebrow, .eyebrow-line, .eyebrow-text defined in shared.css */
         #hero .eyebrow { margin-bottom: 1.2rem; }
 
         /* ─── Section inner ─────────────────────────────────── */
@@ -600,33 +575,22 @@
         .resume-summary p + p { margin-top: 0.8rem; }
 
         /* ── Layout: sidebar floats left, main content flush left ── */
-        /*
-         * The sidebar sits to the left of the summary box edge.
-         * Main content (sections) aligns with the summary's left edge.
-         * Achieved by making the outer wrapper full-width, with the
-         * sidebar absolutely positioned relative to the section-inner,
-         * and the main content taking full width of section-inner.
-         */
+        /* Replaced absolute positioning with CSS grid — the absolute
+         * approach depended on viewport margin space that doesn't
+         * reliably exist inside a centered max-width container. */
         .resume-layout-outer {
-            position: relative;
-        }
-        .resume-sidebar {
-            position: absolute;
-            top: 0;
-            left: calc(-1 * (var(--sidebar-w) + var(--sidebar-gap)));
-            width: var(--sidebar-w);
+            display: grid;
+            grid-template-columns: var(--sidebar-w) 1fr;
+            gap: 0 var(--sidebar-gap);
+            align-items: start;
         }
         .resume-sidebar-sticky {
             position: sticky;
             top: 5.5rem;
         }
-        :root {
-            --sidebar-w:   180px;
-            --sidebar-gap: 2.5rem;
-        }
-
-        /* Hide sidebar at narrow viewports — section headings suffice */
+        /* Collapse sidebar column at narrow viewports */
         @media (max-width: 1080px) {
+            .resume-layout-outer { grid-template-columns: 1fr; }
             .resume-sidebar { display: none; }
         }
 
