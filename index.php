@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Primary Meta -->
-    <title>Toby Ziegler — Résumé & AI Job Fit Tool</title>
+    <title>Toby Ziegler, Résumé & AI Job Fit Tool</title>
     <meta name="description" content="Thirty years of design, systems thinking, and a fast-developing AI engineering practice. Paste a job description and get an honest fit assessment." />
     <meta name="author" content="Toby Ziegler" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Toby Ziegler — Résumé & AI Job Fit Tool" />
+    <meta property="og:title" content="Toby Ziegler, Résumé & AI Job Fit Tool" />
     <meta property="og:description" content="Thirty years of design, systems thinking, and a fast-developing AI engineering practice. Paste a job description and get an honest fit assessment." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://resume.tobyziegler.com" />
@@ -50,7 +50,7 @@
     }
     </script>
 
-    <!-- Fonts loaded via @import in shared.css — no duplicate <link> tags needed here -->
+    <!-- Fonts loaded via @import in shared.css, no duplicate <link> tags needed here -->
 
     <style>
         /* ─── Page-specific tokens ─────────────────────────────
@@ -59,7 +59,7 @@
          * Only tokens not present in shared.css live here.
          * ────────────────────────────────────────────────────── */
         :root {
-            /* Fit-tool section — warm brown palette, page-specific */
+            /* Fit-tool section, warm brown palette, page-specific */
             --fit-bg:       #3D2B1F;   /* warm dark brown */
             --fit-bg-input: #4F3828;   /* slightly lighter for textarea */
             --fit-text:     #F0E8DC;   /* warm off-white */
@@ -354,7 +354,7 @@
             cursor: not-allowed;
         }
 
-        /* ─── Fit Result — card layout ──────────────────────── */
+        /* ─── Fit Result, card layout ──────────────────────── */
         #fit-result {
             display: none;
             margin-top: 2.5rem;
@@ -374,7 +374,7 @@
             .fit-result-top { grid-template-columns: 1fr; }
         }
 
-        /* Signal card — big verdict */
+        /* Signal card, big verdict */
         .fit-card-signal {
             background: rgba(240, 232, 220, 0.07);
             border: 1px solid var(--fit-rule);
@@ -421,7 +421,7 @@
             margin-bottom: 0.3rem;
         }
 
-        /* Summary card — sits beside signal */
+        /* Summary card, sits beside signal */
         .fit-card-summary {
             background: rgba(240, 232, 220, 0.07);
             border: 1px solid var(--fit-rule);
@@ -492,7 +492,7 @@
             line-height: 1.65;
         }
 
-        /* Result header — clear button */
+        /* Result header, clear button */
         .fit-result-clear {
             display: flex;
             justify-content: flex-end;
@@ -574,8 +574,8 @@
         }
         .resume-summary p + p { margin-top: 0.8rem; }
 
-        /* ── Layout: sidebar floats left, main content flush left ── */
-        /* Replaced absolute positioning with CSS grid — the absolute
+        /* Layout: sidebar floats left, main content flush left */
+        /* Replaced absolute positioning with CSS grid; the absolute
          * approach depended on viewport margin space that doesn't
          * reliably exist inside a centered max-width container. */
         .resume-layout-outer {
@@ -619,7 +619,7 @@
             border-left-color: var(--green);
         }
 
-        /* Resume sections — full width of section-inner */
+        /* Resume sections, full width of section-inner */
         .resume-section {
             margin-bottom: 3.5rem;
             scroll-margin-top: 5.5rem;
@@ -797,7 +797,7 @@
         .education-degree strong {
             font-weight: 700;
             color: var(--green);
-            font-size: 0.8rem;   /* page-specific — abbreviation badge, smaller than --text-xs intentionally */
+            font-size: 0.8rem;   /* page-specific, abbreviation badge, smaller than --text-xs intentionally */
             letter-spacing: 0.06em;
             text-transform: uppercase;
         }
@@ -866,7 +866,7 @@
         </h1>
         <p class="hero-sub">
             Graphic designer, document manager, AI engineering practitioner. 
-            Springfield, MO — and building something worth looking at.
+            Building something worth looking at.
         </p>
         <div class="hero-meta">
             <div class="hero-meta-item"><span>30+</span> years design &amp; systems leadership</div>
@@ -893,14 +893,14 @@
             Get an <em>honest</em> read.
         </h2>
         <p class="fit-sub">
-            This tool uses everything known about Toby's background — the résumé and the stories behind it — 
+            This tool uses everything known about Toby's background, the résumé and the stories behind it, 
             to give you a candid fit assessment. A lukewarm fit called lukewarm is more useful than a lukewarm fit called strong.
         </p>
 
         <div class="fit-input-area">
             <textarea
                 id="job-description"
-                placeholder="Paste the job description here — title, responsibilities, requirements, whatever you have. The more context, the better the assessment."
+                placeholder="Paste the job description here; title, responsibilities, requirements, whatever you have. The more context, the better the assessment."
                 rows="8"
                 aria-label="Job description"
             ></textarea>
@@ -969,7 +969,7 @@
         <!-- Summary -->
         <div class="resume-summary reveal">
             <p>
-                Thirty years of making complex organizations work — designing systems, governing documents, and building workflows 
+                Thirty years of making complex organizations work; designing systems, governing documents, and building workflows 
                 that outlast the people who commissioned them. I've led department-wide digital transformations, chaired a governance 
                 committee that grew to ISO 9001 scope, and maintained a 10,000-file library that a major health system depends on daily.
             </p>
@@ -983,7 +983,7 @@
 
         <div class="resume-layout-outer">
 
-            <!-- Sidebar — absolutely positioned to the left of content -->
+            <!-- Sidebar, absolutely positioned to the left of content -->
             <aside class="resume-sidebar" aria-label="Section navigation">
                 <div class="resume-sidebar-sticky">
                     <nav>
@@ -997,7 +997,7 @@
                 </div>
             </aside>
 
-            <!-- Main Resume Content — full width of section-inner -->
+            <!-- Main Resume Content, full width of section-inner -->
             <main>
 
                 <!-- Core Competencies -->
@@ -1006,15 +1006,15 @@
                     <div class="competency-grid">
                         <div class="competency-item">
                             <div class="competency-title">AI Engineering &amp; Prompt Design</div>
-                            <div class="competency-desc">Directing AI models to produce complete, production-grade applications — structured prompting, iterative debugging, quality review. Three shipped projects; methodology in active development.</div>
+                            <div class="competency-desc">Directing AI models to produce complete, production-grade applications; structured prompting, iterative debugging, quality review. Three shipped projects; methodology in active development.</div>
                         </div>
                         <div class="competency-item">
                             <div class="competency-title">Graphic Design &amp; Visual Communication</div>
-                            <div class="competency-desc">30+ years across print, digital, UI/UX, and document design — with a consistent instinct for hierarchy, clarity, and work that earns trust from its audience.</div>
+                            <div class="competency-desc">30+ years across print, digital, UI/UX, and document design, with a consistent instinct for hierarchy, clarity, and work that earns trust from its audience.</div>
                         </div>
                         <div class="competency-item">
                             <div class="competency-title">Systems Thinking &amp; Workflow Automation</div>
-                            <div class="competency-desc">Built and led complete workflow transformations — film to digital, imagesetter to direct imaging, fully automated PDF pre-processing. ISO 9001 document governance at health-system scale.</div>
+                            <div class="competency-desc">Built and led complete workflow transformations; film to digital, imagesetter to direct imaging, fully automated PDF pre-processing. ISO 9001 document governance at health-system scale.</div>
                         </div>
                         <div class="competency-item">
                             <div class="competency-title">Project &amp; Documentation Management</div>
@@ -1030,16 +1030,16 @@
                     <article class="experience-entry">
                         <div class="experience-header">
                             <div class="experience-title">Graphic Designer &amp; Document Manager</div>
-                            <div class="experience-date">February 2001 – Present</div>
+                            <div class="experience-date">February 2001 to Present</div>
                         </div>
-                        <div class="experience-company">CoxHealth — Springfield, Missouri</div>
+                        <div class="experience-company">CoxHealth • Springfield, Missouri</div>
                         <ul class="experience-bullets">
-                            <li>Sole responsible party for all forms in a mission-critical patient records platform (Addressograph/Patientworks) serving a regional health system — built and maintained end-to-end</li>
+                            <li>Sole responsible party for all forms in a mission-critical patient records platform (Addressograph/Patientworks) serving a regional health system, built and maintained end-to-end</li>
                             <li>Maintained and governed a library of 10,000+ active files across 800+ departments, with rigorous version control and full lifecycle tracking</li>
-                            <li>Chair, Document Control Oversight Committee — set standards and policy for documentation practice across the entire health system; part of ISO 9001 compliance program, directly answerable to the top executive committee</li>
-                            <li>Led the organization's transition from fully analog to all-digital design and document workflows across multiple technology generations</li>
-                            <li>10+ years building internal software tools to support document management, design production, and departmental operations</li>
-                            <li>Coordinated design and documentation projects across 800+ departments, managing vendor and contractor relationships throughout</li>
+                            <li>Chair, Document Control Oversight Committee; a multi-disciplinary approach to set standards and policy for documentation practice across the entire health system; part of ISO 9001 compliance program, directly answerable to the top executive committee</li>
+                            <li>Led the organization's transition from fully analog production to all-digital design and document workflows across multiple technology generations</li>
+                            <li>20+ years building internal software tools to support document management, design production, and departmental operations</li>
+                            <li>Coordinated design and documentation projects across all 800+ departments, managing vendor and contractor relationships throughout</li>
                         </ul>
                     </article>
 
@@ -1049,8 +1049,8 @@
                         </div>
                         <div class="experience-company">Sweetheart Cup Company</div>
                         <ul class="experience-bullets">
-                            <li>Built and owned the company-wide template library across Freehand, Illustrator, and Photoshop — covering all 100+ product sizes, reducing multi-step setup to a single step. Nobody asked for this. It became the foundation every project was built on.</li>
-                            <li>Produced thousands of individual product designs annually for cups, tubs, and containers — owned the full project lifecycle from customer brief through final production handoff</li>
+                            <li>Built and owned the company-wide template library across Freehand, Illustrator, and Photoshop, covering all 100+ product sizes, reducing multi-step setup to a single step. Nobody asked for this. It became the foundation every project was built on.</li>
+                            <li>Produced thousands of individual product designs annually for cups, tubs, and containers; owned the full project lifecycle from customer brief through final production handoff</li>
                         </ul>
                     </article>
 
@@ -1101,11 +1101,11 @@
                             </div>
                             <div class="portfolio-year">2026</div>
                         </div>
-                        <div class="portfolio-subtitle">resume.tobyziegler.com — this page</div>
+                        <div class="portfolio-subtitle">resume.tobyziegler.com; this page</div>
                         <ul class="portfolio-bullets">
-                            <li>AI-powered job fit assessment tool — visitors paste a job description and receive a structured, honest alignment analysis against a detailed professional profile</li>
+                            <li>AI-powered job fit assessment tool; visitors paste a job description and receive a structured, honest alignment analysis against a detailed professional profile</li>
                             <li>Server-side PHP proxy calling the Anthropic API; structured JSON output rendered dynamically with fit-level badges, alignment breakdown, and a plain-language bottom line</li>
-                            <li>Built through AI-directed engineering; the system prompt, response schema, and UI were all designed and iterated through prompting — no hand-written code</li>
+                            <li>Built through AI-directed engineering; the system prompt, response schema, and UI were all designed and iterated through prompting, very little hand-written code</li>
                         </ul>
                     </article>
 
@@ -1119,7 +1119,7 @@
                         <div class="portfolio-subtitle">dadabase.tobyziegler.com</div>
                         <ul class="portfolio-bullets">
                             <li>Full-stack web application: joke database with search, voting, moderation queue, and admin panel</li>
-                            <li>Built entirely through AI-directed engineering — PHP 8.1, MySQL, vanilla JavaScript, deployed to shared hosting via Git</li>
+                            <li>Built entirely through AI-directed engineering using PHP 8.1, MySQL, vanilla JavaScript; deployed to shared hosting via Git</li>
                             <li>AI-powered multi-category classification via Anthropic API; bulk import/export (CSV &amp; JSON), bcrypt admin authentication, iteratively refined UX</li>
                         </ul>
                     </article>
@@ -1131,12 +1131,12 @@
                             </div>
                             <div class="portfolio-year">2010–2020</div>
                         </div>
-                        <div class="portfolio-subtitle">CoxHealth / Children's Miracle Network Telethon — Design &amp; Program</div>
+                        <div class="portfolio-subtitle">CoxHealth / Children's Miracle Network Telethon, Design &amp; Program</div>
                         <ul class="portfolio-bullets">
-                            <li>Redesigned the CMN telethon check from scratch — replaced two yellow sheets taped together with a full-color photographic check featuring CMN children, their stories, and a realistic check layout sized for the on-air presentation format</li>
-                            <li>Cost per check: under $7 (vs. $50+ from outside vendor with labor donation discount) — approximately 85% cost reduction; negotiated access to engineering equipment in lieu of a dedicated budget</li>
+                            <li>Redesigned the CMN telethon check from scratch; replaced two yellow sheets taped together with a full-color photographic check featuring CMN children, their stories, and a realistic check layout sized for the on-air presentation format</li>
+                            <li>Cost per check: under $7 (vs. $50+ from outside vendor with labor donation discount) approximately 85% cost reduction; negotiated access to engineering equipment in lieu of a dedicated budget</li>
                             <li>Program ran for a decade; checks were saved and mounted by organizations as proud displays of their contributions. Other CMN chapters across the country attempted to replicate the model.</li>
-                            <li>An iterative design program where each year added new children, their stories, and evolving visual refinements — documented at projects.tobyziegler.com/checks/</li>
+                            <li>An iterative design program where each year added new children, their stories, and evolving visual refinements; documented at projects.tobyziegler.com/checks/</li>
                         </ul>
                     </article>
 
@@ -1149,7 +1149,7 @@
                         </div>
                         <div class="portfolio-subtitle">tobyziegler.com</div>
                         <ul class="portfolio-bullets">
-                            <li>Personal portfolio site featuring a study/library metaphor with subdomains as "rooms" — a shared CSS design system across all properties</li>
+                            <li>Personal portfolio site featuring a study/library metaphor with subdomains as "rooms"; a shared CSS design system across all properties</li>
                             <li>Built in PHP/HTML/CSS/vanilla JavaScript with no frameworks; fluid typography, noise-texture layering, custom CSS bookcase component, warm editorial aesthetic throughout</li>
                         </ul>
                     </article>
@@ -1164,11 +1164,11 @@
                         <div class="education-school-name">Missouri State University</div>
                         <div class="education-location">Springfield, Missouri</div>
                         <div class="education-degree">
-                            <strong>MS.PM</strong> — Master of Science in Project Management
-                            <em>&nbsp;· In Progress</em>
+                            <strong>MS.PM</strong>  -  Master of Science in Project Management
+                            <em>&nbsp;· 21 of 30 hours</em>
                         </div>
                         <div class="education-degree">
-                            <strong>BAS.TM</strong> — Bachelor of Applied Science in Technology Management
+                            <strong>BAS.TM</strong>  -  Bachelor of Applied Science in Technology Management
                         </div>
                         <div class="education-minor">Minor in Computer Science</div>
                         <div class="education-minor">Minor in Web Application Development</div>
@@ -1177,12 +1177,12 @@
                     <div class="education-school">
                         <div class="education-school-name">Ozarks Technical Community College</div>
                         <div class="education-location">Springfield, Missouri</div>
-                        <div class="education-degree"><strong>AAS.CIS</strong> — Associate in Applied Science, Computer Information Science</div>
-                        <div class="education-degree"><strong>AS.EGR</strong> — Associate of Science, Engineering (Mechanical &amp; Electrical)</div>
-                        <div class="education-degree"><strong>AA</strong> — Associate of Arts</div>
-                        <div class="education-degree"><strong>CT.SP.CP</strong> — Certificate of Specialization, Computer Programming</div>
-                        <div class="education-degree"><strong>CT.CIS</strong> — Certificate of Achievement, Computer Information Science</div>
-                        <div class="education-degree"><strong>CT.EGR</strong> — Certificate of Achievement, Engineering</div>
+                        <div class="education-degree"><strong>AAS.CIS</strong>  -  Associate in Applied Science, Computer Information Science</div>
+                        <div class="education-degree"><strong>AS.EGR</strong>  -  Associate of Science, Engineering (Mechanical &amp; Electrical)</div>
+                        <div class="education-degree"><strong>AA</strong>  -  Associate of Arts</div>
+                        <div class="education-degree"><strong>CT.SP.CP</strong>  -  Certificate of Specialization, Computer Programming</div>
+                        <div class="education-degree"><strong>CT.CIS</strong>  -  Certificate of Achievement, Computer Information Science</div>
+                        <div class="education-degree"><strong>CT.EGR</strong>  -  Certificate of Achievement, Engineering</div>
                         <div class="education-capstone">
                             Capstone: Designed and deployed customized Raspberry Pi digital signage for OTC campus, 
                             using locally cached, network-driven content with DNS addressing and hierarchical device management.
