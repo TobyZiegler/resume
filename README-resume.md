@@ -163,7 +163,7 @@ When starting a working session on this project, provide:
 ## Open Decisions
 
 - [x] Page structure — single page ✓
-- [x] AI tool placement — prominent above the résumé ✓
+- [x] AI tool placement — prominent above the résumé; parchment overlay treatment (dark band removed April 2026) ✓
 - [x] Upload support — paste only for now ✓
 - [x] The "known information" document — written, lives in `fit.php` system prompt ✓
 - [x] Honesty calibration — implemented per system-prompt-job-fit.md ✓
@@ -171,11 +171,14 @@ When starting a working session on this project, provide:
 - [x] Font migration — Fraunces → Lora, matching shared.css v2.4 ✓
 - [x] CSS token debt — full :root block canonical; --pad-page applied throughout ✓
 - [x] Professional summary — rewritten to lead with 30 years, AI engineering as evolution ✓
-- [x] Portfolio — AI Fit Tool added as entry #1; now shows 3 shipped projects ✓
+- [x] Portfolio — expanded to 6 shipped projects in system prompt; page content to be updated ✓
 - [x] Hero meta — "3 shipped AI-directed applications" replaces misleading "1 shipped app" ✓
 - [x] DirectBuy — removed (undated, thin bullets, diluted anchor role) ✓
+- [x] Link placement on main site — nav bar added April 2026 ✓
+- [x] System prompt updated — portfolio expanded, MS credit hours added, NISC application context added ✓
+- [x] Copy result button added to fit tool output ✓
 - [ ] Source control — subdirectory of tobyzieglerdotcom repo, or separate repo?
-- [ ] Link placement on main site — not yet added
+- [ ] Portfolio entries on the page itself — still shows 3; update to match system prompt's 6 projects
 - [ ] Download option — offer a PDF download alongside the web version?
 - [ ] Manager perspective stories — still TBD; add to `fit.php` system prompt when written
 - [ ] PDF upload support — deferred to polish pass
@@ -191,4 +194,4 @@ When starting a working session on this project, provide:
 
 ---
 
-*Created: March 2026 — initial brief. Updated March 2026 — initial build complete, deploying and testing. Updated April 2026 — Fraunces→Lora migration, CSS token reconciliation, content strengthening pass.*
+*Created: March 2026 — initial brief. Updated March 2026 — initial build complete, deploying and testing. Updated April 2026 — Fraunces→Lora migration, CSS token reconciliation, content strengthening pass. Updated April 2026 — dark band removed from fit tool, system prompt expanded with full portfolio and NISC context, copy result button added, nav link to main site confirmed.*

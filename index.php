@@ -59,14 +59,6 @@
          * Only tokens not present in shared.css live here.
          * ────────────────────────────────────────────────────── */
         :root {
-            /* Fit-tool section, warm brown palette, page-specific */
-            --fit-bg:       #3D2B1F;   /* warm dark brown */
-            --fit-bg-input: #4F3828;   /* slightly lighter for textarea */
-            --fit-text:     #F0E8DC;   /* warm off-white */
-            --fit-muted:    rgba(240, 232, 220, 0.65);
-            --fit-rule:     rgba(240, 232, 220, 0.12);
-            --fit-green:    #8BAF6D;   /* --green lightened for dark bg */
-
             /* Résumé sidebar layout */
             --sidebar-w:    180px;
             --sidebar-gap:  2.5rem;
@@ -234,72 +226,47 @@
 
         /* ─── AI Fit Tool ───────────────────────────────────── */
         #fit-tool {
-            background: var(--fit-bg);
-            color: var(--fit-text);
+            background: rgba(44, 31, 20, 0.1);   /* parchment overlay — matches #process on main site */
             padding: 5rem var(--pad-page);
             position: relative;
             overflow: hidden;
-        }
-        #fit-tool::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            opacity: 0.025;
-            background-image: url('https://tobyziegler.com/assets/ParchmentPattern01.png');
-            background-size: 200px 200px;
-            pointer-events: none;
         }
         .fit-tool-inner {
             max-width: 960px;
             margin: 0 auto;
         }
-        .fit-eyebrow {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            margin-bottom: 1.2rem;
-        }
-        .fit-eyebrow-line {
-            width: 2rem;
-            height: 1.5px;
-            background: var(--fit-green);
-            flex-shrink: 0;
-        }
-        .fit-eyebrow-text {
-            font-size: var(--text-sm);
-            font-weight: 600;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: var(--fit-green);
-        }
+        /* Reuse canonical .eyebrow from shared.css; page-specific margin only */
+        #fit-tool .eyebrow { margin-bottom: 1.2rem; }
+
         .fit-heading {
             font-family: var(--font-display);
             font-size: clamp(1.8rem, 3.5vw, 2.8rem);
             font-weight: 300;
             letter-spacing: -0.02em;
             line-height: 1.2;
-            color: var(--fit-text);
+            color: var(--text);
             margin-bottom: 0.8rem;
         }
-        .fit-heading em { font-style: italic; color: var(--fit-green); }
+        .fit-heading em { font-style: italic; color: var(--green); }
         .fit-sub {
             font-size: var(--text-base);
             line-height: 1.65;
-            color: var(--fit-muted);
+            color: var(--text-muted);
             max-width: 600px;
             margin-bottom: 2.4rem;
         }
 
         /* Input area */
         .fit-input-area {
-            background: var(--fit-bg-input);
-            border: 1px solid rgba(240, 232, 220, 0.2);
+            background: var(--white-soft);
+            border: 1.5px solid var(--rule);
             border-radius: var(--radius);
             overflow: hidden;
             transition: border-color var(--transition);
+            box-shadow: var(--shadow-card);
         }
         .fit-input-area:focus-within {
-            border-color: rgba(139, 175, 109, 0.7);
+            border-color: var(--green);
         }
         #job-description {
             display: block;
@@ -312,45 +279,46 @@
             font-family: var(--font-body);
             font-size: var(--text-base);
             line-height: 1.65;
-            color: var(--fit-text);
+            color: var(--text);
             resize: vertical;
         }
-        #job-description::placeholder { color: rgba(240, 232, 220, 0.35); }
+        #job-description::placeholder { color: rgba(44, 31, 20, 0.3); }
         .fit-input-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0.8rem 1.8rem;
-            border-top: 1px solid var(--fit-rule);
+            border-top: 1px solid var(--rule);
             gap: 1rem;
         }
         .fit-char-count {
             font-size: var(--text-sm);
-            color: rgba(240, 232, 220, 0.4);
+            color: var(--text-muted);
+            opacity: 0.6;
         }
         .btn-assess {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
             padding: 0.6rem 1.8rem;
-            background: var(--fit-green);
-            color: #1C2E14;
+            background: var(--green);
+            color: var(--white-soft);
             font-family: var(--font-body);
             font-size: var(--text-sm);
             font-weight: 700;
             letter-spacing: 0.04em;
-            border: 2px solid var(--fit-green);
+            border: 2px solid var(--green);
             border-radius: var(--radius-pill);
             cursor: pointer;
             transition: background var(--transition), color var(--transition), transform 0.18s;
         }
         .btn-assess:hover:not(:disabled) {
             background: transparent;
-            color: var(--fit-green);
+            color: var(--green);
             transform: translateY(-2px);
         }
         .btn-assess:disabled {
-            opacity: 0.4;
+            opacity: 0.35;
             cursor: not-allowed;
         }
 
@@ -376,8 +344,8 @@
 
         /* Signal card, big verdict */
         .fit-card-signal {
-            background: rgba(240, 232, 220, 0.07);
-            border: 1px solid var(--fit-rule);
+            background: var(--white-soft);
+            border: 1.5px solid var(--rule);
             border-radius: var(--radius);
             padding: 2rem 2.4rem;
             display: flex;
@@ -386,6 +354,7 @@
             justify-content: center;
             text-align: center;
             min-width: 200px;
+            box-shadow: var(--shadow-card);
         }
         .fit-signal-level {
             font-family: var(--font-display);
@@ -396,10 +365,10 @@
             line-height: 1.1;
             margin-bottom: 0.6rem;
         }
-        .fit-signal-level.strong   { color: #8FC96E; }
-        .fit-signal-level.moderate { color: #D4A847; }
-        .fit-signal-level.partial  { color: #D4827A; }
-        .fit-signal-level.limited  { color: rgba(240, 232, 220, 0.5); }
+        .fit-signal-level.strong   { color: #3A7A2A; }
+        .fit-signal-level.moderate { color: #8A6A10; }
+        .fit-signal-level.partial  { color: var(--burg); }
+        .fit-signal-level.limited  { color: var(--text-muted); }
 
         .fit-signal-pip {
             width: 10px; height: 10px;
@@ -407,36 +376,38 @@
             display: inline-block;
             margin-bottom: 0.8rem;
         }
-        .strong  .fit-signal-pip { background: #8FC96E; box-shadow: 0 0 8px rgba(143,201,110,0.6); }
-        .moderate .fit-signal-pip { background: #D4A847; box-shadow: 0 0 8px rgba(212,168,71,0.5); }
-        .partial .fit-signal-pip { background: #D4827A; box-shadow: 0 0 8px rgba(212,130,122,0.5); }
-        .limited .fit-signal-pip { background: rgba(240, 232, 220, 0.4); }
+        .strong  .fit-signal-pip { background: #3A7A2A; box-shadow: 0 0 8px rgba(58,122,42,0.5); }
+        .moderate .fit-signal-pip { background: #8A6A10; box-shadow: 0 0 8px rgba(138,106,16,0.4); }
+        .partial .fit-signal-pip { background: var(--burg); box-shadow: 0 0 8px rgba(123,45,58,0.4); }
+        .limited .fit-signal-pip { background: var(--text-muted); }
 
         .fit-signal-label {
             font-size: var(--text-xs);
             font-weight: 600;
             letter-spacing: 0.14em;
             text-transform: uppercase;
-            color: rgba(240, 232, 220, 0.45);
+            color: var(--text-muted);
+            opacity: 0.6;
             margin-bottom: 0.3rem;
         }
 
         /* Summary card, sits beside signal */
         .fit-card-summary {
-            background: rgba(240, 232, 220, 0.07);
-            border: 1px solid var(--fit-rule);
+            background: var(--white-soft);
+            border: 1.5px solid var(--rule);
             border-radius: var(--radius);
             padding: 1.8rem 2rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            box-shadow: var(--shadow-card);
         }
         .fit-card-summary p {
             font-family: var(--font-display);
             font-style: italic;
             font-size: var(--text-body);
             line-height: 1.6;
-            color: var(--fit-text);
+            color: var(--text);
         }
 
         /* Bottom row: three cards side by side */
@@ -450,17 +421,18 @@
         }
 
         .fit-card {
-            background: rgba(240, 232, 220, 0.05);
-            border: 1px solid var(--fit-rule);
+            background: var(--white-soft);
+            border: 1.5px solid var(--rule);
             border-radius: var(--radius);
             padding: 1.6rem 1.8rem;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-card);
         }
         /* Subtle top accent line per card type */
-        .fit-card-alignment { border-top: 2px solid rgba(143, 201, 110, 0.5); }
-        .fit-card-gaps      { border-top: 2px solid rgba(212, 130, 122, 0.5); }
-        .fit-card-bottom    { border-top: 2px solid rgba(212, 168, 71, 0.5); background: rgba(240, 232, 220, 0.08); }
+        .fit-card-alignment { border-top: 2px solid rgba(58, 92, 59, 0.5); }
+        .fit-card-gaps      { border-top: 2px solid rgba(123, 45, 58, 0.4); }
+        .fit-card-bottom    { border-top: 2px solid rgba(107, 87, 68, 0.4); background: var(--bg-alt); }
 
         .fit-card-label {
             font-size: var(--text-xs);
@@ -469,14 +441,14 @@
             text-transform: uppercase;
             margin-bottom: 1rem;
         }
-        .fit-card-alignment .fit-card-label { color: #8FC96E; }
-        .fit-card-gaps      .fit-card-label { color: #D4827A; }
-        .fit-card-bottom    .fit-card-label { color: #D4A847; }
+        .fit-card-alignment .fit-card-label { color: var(--green); }
+        .fit-card-gaps      .fit-card-label { color: var(--burg); }
+        .fit-card-bottom    .fit-card-label { color: var(--text-muted); }
 
         .fit-card-content {
             font-size: var(--text-sm);
             line-height: 1.7;
-            color: rgba(240, 232, 220, 0.85);
+            color: var(--text-muted);
         }
         .fit-card-content p { margin-bottom: 0.6rem; }
         .fit-card-content p:last-child { margin-bottom: 0; }
@@ -488,7 +460,7 @@
             font-family: var(--font-display);
             font-style: italic;
             font-size: var(--text-base);
-            color: var(--fit-text);
+            color: var(--text);
             line-height: 1.65;
         }
 
@@ -501,13 +473,14 @@
         .fit-result-clear button {
             background: none;
             border: none;
-            color: rgba(240, 232, 220, 0.35);
+            color: var(--text-muted);
             cursor: pointer;
             font-size: var(--text-sm);
             padding: 0.3rem 0;
-            transition: color var(--transition);
+            opacity: 0.5;
+            transition: opacity var(--transition);
         }
-        .fit-result-clear button:hover { color: rgba(240, 232, 220, 0.7); }
+        .fit-result-clear button:hover { opacity: 1; }
 
         /* Loading state */
         #fit-loading {
@@ -523,7 +496,7 @@
         }
         .loading-dots span {
             width: 9px; height: 9px;
-            background: var(--fit-green);
+            background: var(--green);
             border-radius: 50%;
             animation: pulse 1.4s ease-in-out infinite;
         }
@@ -531,7 +504,7 @@
         .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
         .loading-text {
             font-size: var(--text-base);
-            color: var(--fit-muted);
+            color: var(--text-muted);
             font-style: italic;
         }
 
@@ -539,7 +512,7 @@
         #fit-error {
             display: none;
             padding: 1.6rem 1.8rem;
-            color: #D4827A;
+            color: var(--burg);
             font-size: var(--text-base);
             line-height: 1.6;
         }
@@ -547,8 +520,22 @@
         #fit-error-detail {
             margin-top: 0.4rem;
             font-size: var(--text-sm);
-            color: rgba(212, 130, 122, 0.7);
+            color: rgba(123, 45, 58, 0.7);
             font-family: monospace;
+        }
+        .fit-result-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.2rem;
+        }
+        @media (max-width: 820px) {
+            .fit-result-cards { grid-template-columns: 1fr; }
+        }
+            font-size: var(--text-xs);
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
         }
 
 
@@ -884,9 +871,9 @@
 <!-- ─── AI Job Fit Tool ───────────────────────────────────── -->
 <section id="fit-tool">
     <div class="fit-tool-inner">
-        <div class="fit-eyebrow">
-            <div class="fit-eyebrow-line"></div>
-            <span class="fit-eyebrow-text">AI-Powered Assessment</span>
+        <div class="eyebrow">
+            <span class="eyebrow-line"></span>
+            <span class="eyebrow-text">AI-Powered Assessment</span>
         </div>
         <h2 class="fit-heading">
             Paste a job description.<br>
@@ -929,6 +916,7 @@
         <!-- Result -->
         <div id="fit-result" role="region" aria-label="Fit assessment result">
             <div class="fit-result-clear">
+                <button onclick="copyResult()" id="btn-copy-result">Copy result</button>
                 <button onclick="clearResult()">✕ Clear</button>
             </div>
             <!-- Top row: signal + summary -->
@@ -1341,6 +1329,38 @@ function escapeHTML(str) {
     const div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
+}
+
+function copyResult() {
+    const level   = document.getElementById('fit-signal-badge').textContent;
+    const summary = document.getElementById('fit-signal-summary-text').textContent;
+    const align   = document.getElementById('result-alignment-text').innerText;
+    const gaps    = document.getElementById('result-gaps-text').innerText;
+    const bottom  = document.getElementById('result-bottom-text').textContent;
+
+    const text = [
+        'FIT ASSESSMENT: ' + level,
+        summary,
+        '',
+        'WHERE IT ALIGNS',
+        align,
+        '',
+        'HONEST GAPS',
+        gaps,
+        '',
+        'BOTTOM LINE',
+        bottom,
+        '',
+        '— resume.tobyziegler.com'
+    ].join('\n');
+
+    navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btn-copy-result');
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = 'Copy result'; }, 2000);
+    }).catch(() => {
+        alert('Could not copy. Try selecting and copying manually.');
+    });
 }
 
 function clearResult() {
