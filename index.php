@@ -852,8 +852,8 @@
             <em>work.</em>
         </h1>
         <p class="hero-sub">
-            Graphic designer, document manager, AI engineering practitioner. 
-            Building something worth looking at.
+            AI engineering practitioner with thirty years of organizational systems experience. 
+            The fit tool below is built the same way I'd work for you.
         </p>
         <div class="hero-meta">
             <div class="hero-meta-item"><span>30+</span> years design &amp; systems leadership</div>
@@ -957,15 +957,15 @@
         <!-- Summary -->
         <div class="resume-summary reveal">
             <p>
-                Thirty years of making complex organizations work; designing systems, governing documents, and building workflows 
-                that outlast the people who commissioned them. I've led department-wide digital transformations, chaired a governance 
-                committee that grew to ISO 9001 scope, and maintained a 10,000-file library that a major health system depends on daily.
+                I build AI-powered tools and workflows by directing language models through structured prompting, iterative 
+                debugging, and a designer's instinct for what production-ready actually means. The evidence is on this page: 
+                a live fit-assessment tool calling the Anthropic API, built the same way I build everything.
             </p>
             <p>
-                Now I'm combining that foundation with a fast-developing AI engineering practice: directing AI models to produce 
-                complete, production-ready applications through structured prompting, iterative refinement, and a designer's instinct 
-                for what good looks like. Three shipped projects. A methodology that works. And thirty years of knowing how to 
-                see a problem clearly before touching a tool.
+                That methodology runs on thirty years of professional foundation: designing systems, governing documents, 
+                and leading workflow transformations at a major health system. I've chaired ISO 9001 governance, maintained 
+                a 10,000-file enterprise library, and shipped internal software tools for two decades. I know how organizations 
+                work, what breaks them, and how to see a problem clearly before touching a tool.
             </p>
         </div>
 
@@ -1091,9 +1091,9 @@
                         </div>
                         <div class="portfolio-subtitle">resume.tobyziegler.com; this page</div>
                         <ul class="portfolio-bullets">
-                            <li>AI-powered job fit assessment tool; visitors paste a job description and receive a structured, honest alignment analysis against a detailed professional profile</li>
-                            <li>Server-side PHP proxy calling the Anthropic API; structured JSON output rendered dynamically with fit-level badges, alignment breakdown, and a plain-language bottom line</li>
-                            <li>Built through AI-directed engineering; the system prompt, response schema, and UI were all designed and iterated through prompting, very little hand-written code</li>
+                            <li>Live AI tool: paste any job description and receive a structured fit assessment (alignment, gaps, and a plain-language verdict) powered by a custom system prompt and the Anthropic API</li>
+                            <li>Engineered for real-world deployment: API key protected via server-side PHP proxy, structured JSON schema for consistent output, dynamic rendering with fit-level badges and color signaling</li>
+                            <li>The entire architecture, system prompt, response schema, fallback handling, and UI, was designed through structured prompting; this is the methodology, demonstrated</li>
                         </ul>
                     </article>
 
@@ -1106,9 +1106,39 @@
                         </div>
                         <div class="portfolio-subtitle">dadabase.tobyziegler.com</div>
                         <ul class="portfolio-bullets">
-                            <li>Full-stack web application: joke database with search, voting, moderation queue, and admin panel</li>
-                            <li>Built entirely through AI-directed engineering using PHP 8.1, MySQL, vanilla JavaScript; deployed to shared hosting via Git</li>
-                            <li>AI-powered multi-category classification via Anthropic API; bulk import/export (CSV &amp; JSON), bcrypt admin authentication, iteratively refined UX</li>
+                            <li>Full-stack production application: PHP 8.1 / MySQL / vanilla JS with bcrypt authentication, moderation queue, bulk CSV/JSON import-export, and AI-powered multi-category classification via the Anthropic API</li>
+                            <li>Deployed to live shared hosting via Git; zero frameworks, everything built and reasoned through from scratch using AI-directed engineering</li>
+                            <li>Demonstrates the methodology end-to-end: problem definition, architecture, iterative build, production deployment. No team, no bootcamp, no prior codebase to start from</li>
+                        </ul>
+                    </article>
+
+                    <article class="portfolio-entry">
+                        <div class="portfolio-header">
+                            <div class="portfolio-title">
+                                <a href="https://projects.tobyziegler.com/userhome/" target="_blank" rel="noopener" class="portfolio-link">UserHome ↗</a>
+                            </div>
+                            <div class="portfolio-year">2025</div>
+                        </div>
+                        <div class="portfolio-subtitle">projects.tobyziegler.com/userhome/</div>
+                        <ul class="portfolio-bullets">
+                            <li>Nine-version iterative design study of an enterprise print management landing page, showcased as an interactive slideshow; each version documents a distinct design direction, UI pattern, or layout strategy</li>
+                            <li>Built for a real client context (genericized for portfolio), then reverse-engineered into a public showcase: iframe embedding, Cloudflare artifact resolution, SVG preview generation from live icon path data</li>
+                            <li>Demonstrates the design half of the methodology: visual judgment, iterative refinement, and the discipline to know when a direction is finished</li>
+                        </ul>
+                    </article>
+
+                    <article class="portfolio-entry">
+                        <div class="portfolio-header">
+                            <div class="portfolio-title">
+                                <a href="https://projects.tobyziegler.com/worknet/" target="_blank" rel="noopener" class="portfolio-link">WorkNet ↗</a>
+                            </div>
+                            <div class="portfolio-year">2026</div>
+                        </div>
+                        <div class="portfolio-subtitle">projects.tobyziegler.com/worknet/ &nbsp;·&nbsp; macOS split-tunnel VPN utility</div>
+                        <ul class="portfolio-bullets">
+                            <li>Solved a real operational problem: a hardware VPN was routing all internet traffic through the employer's metered connection, even when a perfectly capable home connection was available. WorkNet fixes this with one double-click, sending only intranet-bound traffic through the VPN and everything else straight to the internet</li>
+                            <li>Investigated and documented three failed approaches before the working solution; the README's "What didn't work" section is the engineering record, not an apology</li>
+                            <li>Shell + osascript wrapped in a native app bundle; kernel-level split-tunnel routing, standard macOS auth dialog, Notification Center feedback, zero external dependencies</li>
                         </ul>
                     </article>
 
